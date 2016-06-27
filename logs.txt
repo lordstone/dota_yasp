@@ -1,0 +1,498 @@
+[PM2] Tailing last 20 lines for [all] processes 
+
+PM2: 2016-06-27 07:06:26: Process with pid 9123 still not killed, retrying...
+PM2: 2016-06-27 07:06:26: Process with pid 9123 still alive after 1600ms, sending it SIGKILL now...
+PM2: 2016-06-27 07:06:26: App name:web id:2 disconnected
+PM2: 2016-06-27 07:06:26: App [web] with id [2] and pid [9123], exited with code [0] via signal [SIGKILL]
+PM2: 2016-06-27 07:06:26: Stopping app:parser id:3
+PM2: 2016-06-27 07:06:26: App name:parser id:3 disconnected
+PM2: 2016-06-27 07:06:26: App [parser] with id [3] and pid [9136], exited with code [0] via signal [SIGINT]
+PM2: 2016-06-27 07:06:26: Stopping app:retriever id:4
+PM2: 2016-06-27 07:06:26: App name:retriever id:4 disconnected
+PM2: 2016-06-27 07:06:26: App [retriever] with id [4] and pid [9167], exited with code [0] via signal [SIGINT]
+PM2: 2016-06-27 08:04:40: Starting execution sequence in -cluster mode- for app name:worker id:0
+PM2: 2016-06-27 08:04:40: App name:worker id:0 online
+PM2: 2016-06-27 08:04:40: Starting execution sequence in -cluster mode- for app name:requests id:1
+PM2: 2016-06-27 08:04:40: App name:requests id:1 online
+PM2: 2016-06-27 08:04:40: Starting execution sequence in -cluster mode- for app name:web id:2
+PM2: 2016-06-27 08:04:40: App name:web id:2 online
+PM2: 2016-06-27 08:04:40: Starting execution sequence in -cluster mode- for app name:parser id:3
+PM2: 2016-06-27 08:04:40: App name:parser id:3 online
+PM2: 2016-06-27 08:04:40: Starting execution sequence in -cluster mode- for app name:retriever id:4
+PM2: 2016-06-27 08:04:40: App name:retriever id:4 online
+
+retriever-4 (err):     at Dota2Client.once (events.js:278:8)
+retriever-4 (err):     at SteamClient.<anonymous> (/usr/src/yasp/svc/retriever.js:123:22)
+retriever-4 (err):     at emitOne (events.js:95:20)
+retriever-4 (err):     at SteamClient.emit (events.js:182:7)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:281:8)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:259:10)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err):     at emitOne (events.js:90:13)
+retriever-4 (err): BigNumber Error: new BigNumber() not a number: undefined
+retriever-4 (err):     at raise (/usr/src/yasp/node_modules/bignumber.js/bignumber.js:1181:25)
+retriever-4 (err):     at /usr/src/yasp/node_modules/bignumber.js/bignumber.js:1169:33
+retriever-4 (err):     at new BigNumber (/usr/src/yasp/node_modules/bignumber.js/bignumber.js:195:67)
+retriever-4 (err):     at Dota2Client.ToAccountID (/usr/src/yasp/node_modules/dota2/index.js:101:12)
+retriever-4 (err):     at Dota2Client.launch (/usr/src/yasp/node_modules/dota2/index.js:111:27)
+retriever-4 (err):     at SteamClient.<anonymous> (/usr/src/yasp/svc/retriever.js:129:22)
+retriever-4 (err):     at emitOne (events.js:95:20)
+retriever-4 (err):     at SteamClient.emit (events.js:182:7)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:281:8)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+
+parser-3 (out): received epilogue
+parser-3 (out): total time taken: 
+parser-3 (out): 7.744
+parser-3 (out): 
+parser-3 (out): 
+parser-3 (out): time spent on post-processing match : 1032.272ms
+parser-3 (out): saving uploaded parse
+parser-3 (out): generating player analysis: 30.626ms
+parser-3 (out): parse job: 9
+parser-3 (out): Mon Jun 27 2016 03:39:32 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&match_id=undefined
+parser-3 (out): parse job: 10
+parser-3 (out): Mon Jun 27 2016 03:39:34 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&match_id=undefined
+parser-3 (out): parse job: 11
+parser-3 (out): Mon Jun 27 2016 03:39:36 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&match_id=undefined
+parser-3 (out): parse job: 12
+parser-3 (out): Mon Jun 27 2016 03:43:50 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&match_id=undefined
+parser-3 (out): parse job: 13
+parser-3 (out): Mon Jun 27 2016 03:43:51 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&match_id=undefined
+parser-3 (out): parse job: 14
+parser-3 (out): Mon Jun 27 2016 03:43:53 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&match_id=undefined
+
+requests-1 (out): waiting for parse job 7, currently in active
+requests-1 (out): waiting for parse job 7, currently in active
+requests-1 (out): waiting for parse job 7, currently in completed
+requests-1 (out): waiting for parse job 8, currently in active
+requests-1 (out): waiting for parse job 8, currently in active
+requests-1 (out): waiting for parse job 8, currently in active
+requests-1 (out): waiting for parse job 8, currently in active
+requests-1 (out): waiting for parse job 8, currently in completed
+requests-1 (out): waiting for parse job 9, currently in failed
+requests-1 (out): waiting for parse job 10, currently in active
+requests-1 (out): waiting for parse job 11, currently in waiting
+requests-1 (out): waiting for parse job 10, currently in failed
+requests-1 (out): waiting for parse job 11, currently in active
+requests-1 (out): waiting for parse job 11, currently in failed
+requests-1 (out): waiting for parse job 12, currently in failed
+requests-1 (out): waiting for parse job 13, currently in active
+requests-1 (out): waiting for parse job 14, currently in waiting
+requests-1 (out): waiting for parse job 13, currently in failed
+requests-1 (out): waiting for parse job 14, currently in active
+requests-1 (out): waiting for parse job 14, currently in failed
+
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: {} }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): TypeError: HashUpdate fail
+web-2 (err):     at TypeError (native)
+web-2 (err):     at Hash.update (crypto.js:70:16)
+web-2 (err):     at /usr/src/yasp/routes/api.js:202:25
+web-2 (err):     at Layer.handle [as handle_request] (/usr/src/yasp/node_modules/express/lib/router/layer.js:95:5)
+web-2 (err):     at next (/usr/src/yasp/node_modules/express/lib/router/route.js:131:13)
+web-2 (err):     at Array.<anonymous> (/usr/src/yasp/node_modules/multer/lib/make-middleware.js:52:37)
+web-2 (err):     at listener (/usr/src/yasp/node_modules/on-finished/index.js:169:15)
+web-2 (err):     at onFinish (/usr/src/yasp/node_modules/on-finished/index.js:100:5)
+web-2 (err):     at callback (/usr/src/yasp/node_modules/ee-first/index.js:55:10)
+web-2 (err):     at IncomingMessage.onevent (/usr/src/yasp/node_modules/ee-first/index.js:93:5)
+web-2 (err):     at emitNone (events.js:80:13)
+web-2 (err):     at IncomingMessage.emit (events.js:179:7)
+web-2 (err):     at endReadableNT (_stream_readable.js:913:12)
+web-2 (err):     at _combinedTickCallback (internal/process/next_tick.js:74:11)
+web-2 (err):     at process._tickDomainCallback (internal/process/next_tick.js:122:9)
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+
+web-2 (out): Received kill signal, shutting down gracefully.
+web-2 (out): [WEB] listening on 5000
+web-2 (out): anonymous visit /, ip 10.0.2.2
+web-2 (out): anonymous visit /upload, ip 10.0.2.2
+web-2 (out): anonymous visit /api/upload_files, ip 10.0.2.2
+web-2 (out): { fieldname: 'replay_blob',
+web-2 (out):   originalname: '2431090400.dem',
+web-2 (out):   encoding: '7bit',
+web-2 (out):   mimetype: 'application/octet-stream',
+web-2 (out):   buffer: <Buffer 50 42 44 45 4d 53 32 00 2d 25 28 02 71 1e 28 02 01 ff ff ff ff 0f 81 01 0a 08 50 42 44 45 4d 53 32 00 10 2c 1a 35 56 61 6c 76 65 20 44 6f 74 61 20 32 ... >,
+web-2 (out):   size: 36185920 }
+web-2 (out): { fieldname: 'replay_blob',
+web-2 (out):   originalname: '2444791291.dem',
+web-2 (out):   encoding: '7bit',
+web-2 (out):   mimetype: 'application/octet-stream',
+web-2 (out):   buffer: <Buffer 50 42 44 45 4d 53 32 00 73 80 6d 01 a9 79 6d 01 01 ff ff ff ff 0f 81 01 0a 08 50 42 44 45 4d 53 32 00 10 2c 1a 35 56 61 6c 76 65 20 44 6f 74 61 20 32 ... >,
+web-2 (out):   size: 23954077 }
+web-2 (out): [TypeError: HashUpdate fail]
+web-2 (out): Received kill signal, shutting down gracefully.
+web-2 (out): [WEB] listening on 5000
+
+parser-3 (err): node_redis: Deprecated: The HGET command contains a "undefined" argument.
+parser-3 (err): This is converted to a "undefined" string now and will return an error from v.3.0 on.
+parser-3 (err): Please handle this in your code to make sure everything works as you intended it to.
+parser-3 (err): invalid body or error
+parser-3 (err): node_redis: Deprecated: The HGET command contains a "undefined" argument.
+parser-3 (err): This is converted to a "undefined" string now and will return an error from v.3.0 on.
+parser-3 (err): Please handle this in your code to make sure everything works as you intended it to.
+parser-3 (err): invalid body or error
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+
+retriever-4 (out): [RETRIEVER] listening at http://:::5100
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 76561198280436389
+retriever-4 (out): acct 0 ready, 1/1
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 76561198280436389
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 76561198280436389
+retriever-4 (out): [RETRIEVER] listening at http://:::5100
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 76561198280436389
+retriever-4 (out): acct 0 ready, 1/1
+retriever-4 (out): [RETRIEVER] listening at http://:::5100
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 76561198280436389
+retriever-4 (out): acct 0 ready, 1/1
+
+worker-0 (out): cleaned 0 completed jobs from queue mmr
+worker-0 (out): cleaned 0 completed jobs from queue mmr
+worker-0 (out): cleaned 0 delayed jobs from queue parse
+worker-0 (out): cleaned 0 delayed jobs from queue parse
+worker-0 (out): cleaned 0 delayed jobs from queue parse
+worker-0 (out): cleaned 0 completed jobs from queue cache
+worker-0 (out): cleaned 0 completed jobs from queue cache
+worker-0 (out): cleaned 0 completed jobs from queue cache
+worker-0 (out): cleanQueues: 562.823ms
+worker-0 (out): saving sets to redis
+worker-0 (out): set build complete
+worker-0 (out): doBuildSets: 618.280ms
+worker-0 (out): buildDistributions: 605.353ms
+worker-0 (out): mmStats: 1035.431ms
+worker-0 (out): invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 (out): Mon Jun 27 2016 08:04:48 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 (out): invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 (out): Mon Jun 27 2016 08:04:54 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 (out): invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 (out): Mon Jun 27 2016 08:05:00 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+
+[PM2] Streaming realtime logs for [all] processes 
+
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:06 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+web-2 anonymous visit /, ip 10.0.2.2
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:12 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+web-2 anonymous visit /upload, ip 10.0.2.2
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:18 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:24 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+web-2 anonymous visit /api/upload_files, ip 10.0.2.2
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:30 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:36 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:42 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 21.908ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:48 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:05:54 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:00 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:06 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:12 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:18 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:24 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:30 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:36 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 24.192ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:42 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:48 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:06:54 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:00 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:06 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:12 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+web-2 anonymous visit /api/upload_files, ip 10.0.2.2
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:19 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+web-2 i file:[object Object]
+web-2 i:0.key:ca8df8e9
+web-2 i file:[object Object]
+web-2 i:1.key:dca9751a
+web-2 i file:[object Object]
+web-2 i:2.key:3e573413
+web-2 match array:0NaN[object Object]
+web-2 match array:1NaN[object Object]
+web-2 match array:2NaN[object Object]
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:25 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+parser-3 parse job: 15
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":0.511,"remaining":null},"speed":null,"percentage":0.012671945331222751,"size":{"total":36185920,"transferred":458546}}}
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":1.511,"remaining":38.224},"speed":910688.2859033754,"percentage":0.03802722163758722,"size":{"total":36185920,"transferred":1376050}}}
+requests-1 waiting for parse job 15, currently in active
+requests-1 waiting for parse job 16, currently in waiting
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":2.512,"remaining":10.955},"speed":2687102.7070063693,"percentage":0.18653669714629337,"size":{"total":36185920,"transferred":6750002}}}
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":3.512,"remaining":8.533},"speed":3004296.6970387246,"percentage":0.29157998470123186,"size":{"total":36185920,"transferred":10551090}}}
+requests-1 waiting for parse job 15, currently in active
+requests-1 waiting for parse job 16, currently in waiting
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":4.512,"remaining":6.512},"speed":3282564.2730496456,"percentage":0.40930091040935257,"size":{"total":36185920,"transferred":14810930}}}
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":5.512,"remaining":3.911},"speed":3840334.1799709727,"percentage":0.5849767533891636,"size":{"total":36185920,"transferred":21167922}}}
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:31 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+requests-1 waiting for parse job 15, currently in active
+requests-1 waiting for parse job 16, currently in waiting
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/ca8df8e9","state":{"time":{"elapsed":6.511,"remaining":1.604},"speed":4458952.849024727,"percentage":0.8023076931580018,"size":{"total":36185920,"transferred":29032242}}}
+parser-3 received epilogue
+parser-3 total time taken: 7.126
+requests-1 waiting for parse job 15, currently in active
+requests-1 waiting for parse job 16, currently in waiting
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 time spent on post-processing match : 796.188ms
+parser-3 saving uploaded parse
+parser-3 generating player analysis: 30.710ms
+parser-3 parse job: 16
+parser-3 {"url":"http://localhost:5200/redis/dca9751a","state":{"time":{"elapsed":0.517,"remaining":null},"speed":null,"percentage":0.019142712115353056,"size":{"total":23954077,"transferred":458546}}}
+requests-1 waiting for parse job 15, currently in completed
+requests-1 waiting for parse job 16, currently in active
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/dca9751a","state":{"time":{"elapsed":1.517,"remaining":29.293},"speed":777483.1905075808,"percentage":0.049237630821675996,"size":{"total":23954077,"transferred":1179442}}}
+parser-3 {"url":"http://localhost:5200/redis/dca9751a","state":{"time":{"elapsed":2.517,"remaining":10.261},"speed":1874607.0719110053,"percentage":0.19697632265271586,"size":{"total":23954077,"transferred":4718386}}}
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:37 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+requests-1 waiting for parse job 16, currently in active
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/dca9751a","state":{"time":{"elapsed":3.517,"remaining":5.169},"speed":2757782.7694057436,"percentage":0.40490485189640163,"size":{"total":23954077,"transferred":9699122}}}
+parser-3 {"url":"http://localhost:5200/redis/dca9751a","state":{"time":{"elapsed":4.517,"remaining":3.308},"speed":3061299.535089661,"percentage":0.5772666590326148,"size":{"total":23954077,"transferred":13827890}}}
+requests-1 waiting for parse job 16, currently in active
+requests-1 waiting for parse job 17, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/dca9751a","state":{"time":{"elapsed":5.517,"remaining":0.726},"speed":3836853.724850462,"percentage":0.8836876494969937,"size":{"total":23954077,"transferred":21167922}}}
+parser-3 received epilogue
+parser-3 total time taken: 
+parser-3 6.174
+parser-3 time spent on post-processing match : 707.391ms
+parser-3 saving uploaded parse
+parser-3 generating player analysis: 21.132ms
+parser-3 parse job: 17
+requests-1 waiting for parse job 16, currently in completed
+requests-1 waiting for parse job 17, currently in active
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":0.513,"remaining":null},"speed":null,"percentage":0.015693409535303668,"size":{"total":29219017,"transferred":458546}}}
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":1.513,"remaining":35.969},"speed":779538.6649041639,"percentage":0.04036556055256753,"size":{"total":29219017,"transferred":1179442}}}
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 5.631ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:43 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+requests-1 waiting for parse job 17, currently in active
+worker-0 running mmStats
+worker-0 Mon Jun 27 2016 08:07:43 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&mmstats=1
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":2.513,"remaining":14.994},"speed":1668960.6048547553,"percentage":0.14354001026112548,"size":{"total":29219017,"transferred":4194098}}}
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":3.513,"remaining":8.176},"speed":2499748.9325362938,"percentage":0.30054460764371366,"size":{"total":29219017,"transferred":8781618}}}
+requests-1 waiting for parse job 17, currently in active
+worker-0 mmStats: 2200.509ms
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":4.513,"remaining":4.592},"speed":3209228.89430534,"percentage":0.4956788929620733,"size":{"total":29219017,"transferred":14483250}}}
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":5.512,"remaining":3.328},"speed":3305297.895500726,"percentage":0.6235254936878951,"size":{"total":29219017,"transferred":18218802}}}
+requests-1 waiting for parse job 17, currently in active
+parser-3 {"url":"http://localhost:5200/redis/3e573413","state":{"time":{"elapsed":6.512,"remaining":1.356},"speed":3713540.8476658477,"percentage":0.8276314702852597,"size":{"total":29219017,"transferred":24182578}}}
+parser-3 received epilogue
+parser-3 total time taken: 7.198
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:49 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+parser-3 time spent on post-processing match : 712.207ms
+parser-3 saving uploaded parse
+parser-3 generating player analysis: 24.978ms
+requests-1 waiting for parse job 17, currently in active
+requests-1 waiting for parse job 17, currently in completed
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:07:55 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:01 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:07 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:13 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:19 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:25 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:31 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:37 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 11.143ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:43 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:49 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:08:55 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:01 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:07 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:13 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:19 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:25 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:31 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:37 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 11.734ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:43 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:49 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:09:55 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:01 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:07 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:13 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:19 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:25 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:31 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:37 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 12.563ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:43 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running mmStats
+worker-0 Mon Jun 27 2016 08:10:45 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&mmstats=1
+worker-0 mmStats: 2040.422ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:49 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:10:55 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:01 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:07 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:13 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:19 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:25 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:31 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:37 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 28.296ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:43 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:49 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:11:55 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:12:01 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:12:07 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Mon Jun 27 2016 08:12:13 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B

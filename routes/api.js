@@ -193,14 +193,15 @@ api.post('/upload_files', multer.array("replay_blob", 20), function(req, res, ne
             var match = [] ;
             if (req.files.length > 0)
             {
+                const hash = crypto.createHash('md5');
                 for(var i = 0; i < req.files.length; i ++)
                 {
-                    console.log(req.files[i]);
+                    console.log('i file:' + req.files[i]);
                     //var key = req.files[i].name + Date.now();
-	                //var key = Math.random().toString(16).slice(2);
-  	                const hash = crypto.createHash('md5');
-    	              hash.update(req.files[i].buffer);
-      	            var key = hash.digest('hex');
+	                  var key = Math.random().toString(16).slice(2);
+  	                //hash.update(req.files[i].buffer);
+      	            //var key = hash.digest('hex');
+                    console.log('i:' + i + '.key:' + key);
         	          redis.setex(new Buffer('upload_blob:' + key), 60 * 60, req.files[i].buffer);
                   	match[i] = {
             	         replay_blob_key: key
@@ -220,7 +221,7 @@ api.post('/upload_files', multer.array("replay_blob", 20), function(req, res, ne
                 var jobs = [];
                 for(var i = 0; i < match.length; i ++)
                 {
-     	            console.log('match array:'+ i + +':' + match[i]);
+     	            console.log('match array:'+ i +':' + match[i]);
       	          queue.addToQueue(rQueue, match[i],
         	        {
           	          attempts: 1
