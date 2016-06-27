@@ -1,43 +1,65 @@
+
 window.requestForm = function requestForm()
 {
-    document.getElementById("match_id").value = window.location.hash.slice(1);
+    //document.getElementById("match_id").value = window.location.hash.slice(1);
+
+// lordstone: modified from requestForm.js
+// for multiple file uploading
+
     $("#file-select").on('change', function()
     {
-        var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
-        $("#file-select-text").text(label);
-        $("#file-select-button").toggleClass('btn-success');
+        // var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+        var f =  document.getElementById('file-select').files;
+        var insertHTML = '';
+        for(var i = 0; i < f.length; i ++){
+            insertHTML += "<li>" + f[i].name + "</li>";
+        }
+        $("#upload_file_ul").html(insertHTML);
+        $("#file-select-text").text('Change Files');
+       //$("#file-select-button").toggleClass('btn-success');
     });
 }
-window.requestSubmit = function submit(response)
+window.uploadSubmit = function submit(response)
 {
     var checker;
-    var grecaptcha = grecaptcha;
+    // var grecaptcha = grecaptcha;
     $("#request").hide('slow');
     $("#messages").empty();
     $("#progContainer").show('slow');
     $("#loading").css("display", "block");
-    var match_id = document.getElementById("match_id").value;
+    // var match_id = document.getElementById("match_id").value;
     var fileSelect = document.getElementById('file-select');
-    // Get the selected files from the input.
-    var file = fileSelect.files[0];
-    console.log(file);
+// Get the selected files from the input.
+    // var file = fileSelect.files[0];
+    var files = fileSelect.files;
+    console.log(files);
     // Create a new FormData object.
     var formData = new FormData();
-    if (file)
-    {
-        formData.append('replay_blob', file, file.name);
+	// formData.append('replay_blob', files, files.name);
+ 
+    var totalLength = 0;
+    for(var i = 0; i < files.length; i ++)
+    {	
+		console.log(files[i]);
+        formData.append('replay_blob', files[i], files[i].name);
+        totalLength += files[i].length;
     }
+	console.log('totalLength:' + totalLength);
+
+/*
     else if (match_id)
     {
         formData.append('match_id', match_id);
     }
+*/
     formData.append('response', response);
     console.log(formData);
     // Set up the request.
     var xhr = new XMLHttpRequest();
     xhr.upload.addEventListener("progress", updateProgress);
     // Open the connection.
-    xhr.open('POST', '/api/request_job', true);
+	// lordstone: use the customized upload_files api
+    xhr.open('POST', '/api/upload_files', true);
     // Set up a handler for when the request finishes.
     xhr.onload = function()
     {
@@ -69,6 +91,12 @@ window.requestSubmit = function submit(response)
             var prog = percentComplete * 100;
             document.getElementById("upload-bar").style.width = prog + "%";
             document.getElementById("upload-bar").innerHTML = prog.toFixed(2) + "% uploaded";
+			// total uploaded
+            // var totalProg = oEvent.loaded / oEvent.total * 100;
+			
+            var totalProg = oEvent.loaded / oEvent.total * 100;
+            document.getElementById("parse-bar").style.width = totalProg + "%";
+            document.getElementById("parse-bar").innerHTML = prog.toFixed(2) + "% Total Uploaded";
         }
     }
 
@@ -79,21 +107,21 @@ window.requestSubmit = function submit(response)
         $("#request").show('slow');
         console.log("clearing interval %s", checker);
         clearInterval(checker);
-        grecaptcha.reset();
+        // grecaptcha.reset();
     }
 
     function poll(job_id)
     {
         $.ajax(
         {
-            url: "/api/request_job?id=" + job_id
+            url: "/api/upload_files?id=" + job_id
         }).done(function(msg)
         {
             console.log(msg);
             if (msg.state === "completed")
-            {
-		console.log('Request & parse completed. replay_blob_key:' + msg.data.payload.replay_blob_key +'.\nmatch_id:' + msg.data.payload.match_id + '.');
-                window.location.assign("/matches/" + (msg.data.payload.replay_blob_key || msg.data.payload.match_id));
+            {//lordstone: insert the next state logic for upload batch
+             //   window.location.assign("/matches/" + (msg.data.payload.replay_blob_key || msg.data.payload.match_id));
+				$("#messages").append("<h2>Successfully Uploaded. Now you can go to center to view updates...</h2>");
             }
             else if (msg.error)
             {
@@ -105,10 +133,13 @@ window.requestSubmit = function submit(response)
             }
             else if (msg.progress)
             {
+				document.getElementById("message").innerHTML("debug: msg.progress");
+				/*
                 var prog = msg.progress;
                 console.log(prog);
                 document.getElementById("parse-bar").style.width = prog + "%";
-                document.getElementById("parse-bar").innerHTML = prog.toFixed(2) + "% parsed";
+                document.getElementById("parse-bar").innerHTML = prog.toFixed(2) + "% Total Uploaded";
+				*/
             }
         });
     }

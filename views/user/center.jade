@@ -1,0 +1,58 @@
+extend /layout
+include /mixins/hero_td
+include /mixins/data_table
+include /mixins/data_table_header
+
+
+block head
+  //link(rel="import" href="/public/paper-fab-menu.html")
+  link(rel='stylesheet', href="/public/css/yasp_home.css")
+   
+
+if user
+  block page_content
+    #top.header.alt.vert
+      h2 Cheuka's Dota Control Center
+      h3 欢迎来到Dota之家
+      img.img-responsive(src='../public/images/curlycue.png', style='margin: auto;')
+      br
+      .row
+        .col-md-6
+          h4 Welcome #{user}
+          p 欢迎
+        .col-md-6.table-responsive
+          User Profile 用户账户
+      br
+      .row
+        .col-md-6
+          p Replays and upload 录像和上传
+        .col-md-6
+          p Functions 功能
+      br
+      .row
+        .col-md-6
+          p Product updates 产品更新
+        .col-md-6
+          p Settings 设置
+        
+
+else
+  p Please log out and retry
+
+
+    
+append footer_assets
+  script(src="/public/js/home/scroll.js")
+  script(src="/public/js/home/animatedNavbar.js")
+  script(src="/public/js/home/polymerFabs.js")
+  script.
+  //  var graphData = !{JSON.stringify(match.graphData)};
+  script(type='text/javascript').
+    document.form1.submit() = function(){
+     if(file_ul.childNodes.length() == 0){           
+       alert('Please select files to upload');
+         return false
+     }
+        return true;
+    }
+  // generateCharts(graphData);

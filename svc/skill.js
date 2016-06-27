@@ -60,6 +60,7 @@ function getPageData(start, options, cb)
     utility.getData(
     {
         url: container.url,
+        proxyAffinityRange: 4,
     }, function(err, data)
     {
         if (err)
