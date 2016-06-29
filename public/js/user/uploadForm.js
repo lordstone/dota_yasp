@@ -1,4 +1,9 @@
-
+// set up the total length and length of each file
+var totalLength;
+// var totalLengthLoaded;
+var totalNum;
+var curNum;
+var last_job_id;
 window.requestForm = function requestForm()
 {
     //document.getElementById("match_id").value = window.location.hash.slice(1);
@@ -36,11 +41,13 @@ window.uploadSubmit = function submit(response)
     // Create a new FormData object.
     var formData = new FormData();
 	// formData.append('replay_blob', files, files.name);
- 
-    var totalLength = 0;
+    fileNum = files.length; // set total files
+    curNum = 0; // set cur file num
+    // totalLengthLoaded = 0; // set cur length loaded
+    // var totalLength = 0;
     for(var i = 0; i < files.length; i ++)
     {	
-		console.log(files[i]);
+	console.log(files[i]);
         formData.append('replay_blob', files[i], files[i].name);
         totalLength += files[i].length;
     }
@@ -91,12 +98,17 @@ window.uploadSubmit = function submit(response)
             var prog = percentComplete * 100;
             document.getElementById("upload-bar").style.width = prog + "%";
             document.getElementById("upload-bar").innerHTML = prog.toFixed(2) + "% uploaded";
+            // skip the parsing phase
+            if(prog >= 100){
+                 alert('Upload Success');
+                 window.location.assign("/");  
+            }
 			// total uploaded
             // var totalProg = oEvent.loaded / oEvent.total * 100;
-			
-            var totalProg = oEvent.loaded / oEvent.total * 100;
-            document.getElementById("parse-bar").style.width = totalProg + "%";
-            document.getElementById("parse-bar").innerHTML = prog.toFixed(2) + "% Total Uploaded";
+            // var totalProg = oEvent.loaded / oEvent.total * 100;
+            // var totalProg = (curNum / totalNum + (percentComplete / totalNum)) * 100;
+            // document.getElementById("parse-bar").style.width = totalProg + "%";
+            // document.getElementById("parse-bar").innerHTML = totalProg.toFixed(2) + "% Total Uploaded. (" + curNum + "/" + totalNum + "files uploaded)";
         }
     }
 
@@ -121,7 +133,13 @@ window.uploadSubmit = function submit(response)
             if (msg.state === "completed")
             {//lordstone: insert the next state logic for upload batch
              //   window.location.assign("/matches/" + (msg.data.payload.replay_blob_key || msg.data.payload.match_id));
-				$("#messages").append("<h2>Successfully Uploaded. Now you can go to center to view updates...</h2>");
+                 curNum += 1;
+                 if(curNum >= totalNum){
+                      // all finished
+ 	                    $("#messages").append("<h2>Successfully Uploaded. Now you can go to center to view updates...</h2>");
+                      //alert('All finished');
+                      window.location.assign("/");         
+                }
             }
             else if (msg.error)
             {

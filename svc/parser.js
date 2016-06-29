@@ -37,6 +37,12 @@ var computeMatchData = compute.computeMatchData;
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+
+//lordstone:
+
+var cheuka_session = require("../util/cheukaSession");
+var user_db = require("../store/user_db");
+
 app.use(bodyParser.json());
 app.get('/', function(req, res)
 {
@@ -92,6 +98,8 @@ pQueue.process(1, function(job, cb)
                 parsed_data.duration = match.duration;
                 parsed_data.replay_blob_key = match.replay_blob_key;
                 parsed_data.parse_status = 2;
+                //lordstone: added user_id
+                parsed_data.user_id = match.user_id;
                 if (match.replay_blob_key)
                 {
                     insertUploadedParse(parsed_data, cb);
@@ -127,6 +135,9 @@ function insertUploadedParse(match, cb)
     console.log('saving uploaded parse');
     //save uploaded replay parse in redis as a cached match
     match.match_id = match.upload.match_id;
+    // lordstone: save user_id
+    match.user_id = match.upload.user_id;    
+
     match.game_mode = match.upload.game_mode;
     match.radiant_win = match.upload.radiant_win;
     match.duration = match.upload.duration;
@@ -140,13 +151,17 @@ function insertUploadedParse(match, cb)
     });
     computeMatchData(match);
     renderMatch(match);
+    
+    //lordstone: modify user_db, keep match private
+    cheuka_session.saveMatchToUser(user_db, match.user_id, match.match_id);
+    
     benchmarkMatch(redis, match, function(err)
     {
         if (err)
         {
             return cb(err);
         }
-        //redis.setex('match:' + match.replay_blob_key, 60 * 60 * 10, JSON.stringify(match));
+        redis.setex('match:' + match.replay_blob_key, 60 * 60 * 10, JSON.stringify(match));
 	insertMatch(db, redis, match,
 	{
 		type: "parsed",

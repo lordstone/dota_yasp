@@ -1,8 +1,9 @@
 var user_mgmt = require('../store/userMgmt');
+var config = require('../config');
 
 function checkUser(db, user_id, password, cb)
 { 
-	if(user_id == 'admin' && password == 'password')
+	if(user_id == config.CHEUKA_ADMIN && password == config.CHEUKA_ADMIN_PASSWORD)
 	{
 		return cb('success', {user_id: 'admin'});
 	}else{
@@ -145,6 +146,14 @@ function deleteInv(db, invitation_code, cb){
 	});	
 }
 
+function checkMatchId(db, user_id, match_id){
+	if(user_id == 'admin') return true;
+	return user_mgmt.checkMatchId(db, user_id, match_id);
+}
+
+function saveMatchToUser(db, user_id, match_id){
+	return user_mgmt.saveMatchToUser(db, user_id, match_id);
+}
 
 module.exports = {
 	findAll: findAll,
@@ -159,5 +168,7 @@ module.exports = {
 	editInv: editInv,
 	newInv: newInv,
 	deleteInv: deleteInv,
-	logoutUser: logoutUser
+	logoutUser: logoutUser,
+	checkMatchId: checkMatchId,
+	saveMatchToUser: saveMatchToUser
 };

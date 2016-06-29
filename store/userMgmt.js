@@ -247,6 +247,61 @@ function editInv(db, new_inv, old_invitation_code, cb){
 	});
 }
 
+function checkMatchId(db, user_id, match_id){
+	db.table('my_match_list').select('users_allowed').where({
+		match_id: match_id
+	}).asCallback(function(err, result){
+		if(err){
+			console.log('error in finding that match');
+			return false;
+		}else{
+			if(!result){
+				//meaning public match
+				return true;
+			}else{
+				 var user_array = result[0];
+				for(int i = 0; i < user_array.length; i ++){
+					if(user_array[i].user_id == user_id){
+						return true;
+					}
+				}
+				return false; // user_id not in the list
+			}	
+		}
+	});
+}
+
+function saveMatchToUser(db, user_id, match_id){
+	db.table('my_match_list').select('users_allowed').where({
+		match_id: match_id
+	}).asCallback(function(err, result){
+		if(result){
+				var user_array = result[0];
+				for(int i = 0; i < user_array.length; i ++){
+					if(user_array[i] == user_id){
+						return;
+					}
+				}
+				user_array.push({user_id: user_id});
+				db.table('my_match_list').where({
+					match_id: match_id
+				}).update({
+					users_allowed: user_array
+				}).asCallback(function(err, result){
+					if(err){
+						console.log('update match list in user_db failed');
+					}
+					return;
+				});
+		}else{
+			var user_array = [{user_id: user_id}];
+			db.table('my_match_list').insert({
+				match_id: match_id,
+				users_allowed: user_id	
+			});
+		}
+	});
+}
 
 module.exports = {
 	logUser: logUser,
@@ -261,6 +316,8 @@ module.exports = {
 	findInv: findInv,
 	newInv: newInv,
 	editInv: editInv,
-	deleteInv: deleteInv
+	deleteInv: deleteInv,
+	checkMatchId: checkMatchId,
+	saveMatchToUser: saveMatchToUser
 };
 
