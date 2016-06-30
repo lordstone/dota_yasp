@@ -1,0 +1,365 @@
+[PM2] Tailing last 20 lines for [all] processes 
+
+PM2: 2016-06-30 14:30:51: Process with pid 368 still not killed, retrying...
+PM2: 2016-06-30 14:30:51: Process with pid 368 still alive after 1600ms, sending it SIGKILL now...
+PM2: 2016-06-30 14:30:51: App name:web id:2 disconnected
+PM2: 2016-06-30 14:30:51: App [web] with id [2] and pid [368], exited with code [0] via signal [SIGKILL]
+PM2: 2016-06-30 14:30:51: Stopping app:parser id:3
+PM2: 2016-06-30 14:30:51: App name:parser id:3 disconnected
+PM2: 2016-06-30 14:30:51: App [parser] with id [3] and pid [401], exited with code [0] via signal [SIGINT]
+PM2: 2016-06-30 14:30:51: Stopping app:retriever id:4
+PM2: 2016-06-30 14:30:51: App name:retriever id:4 disconnected
+PM2: 2016-06-30 14:30:51: App [retriever] with id [4] and pid [420], exited with code [0] via signal [SIGINT]
+PM2: 2016-06-30 14:43:56: Starting execution sequence in -cluster mode- for app name:worker id:0
+PM2: 2016-06-30 14:43:56: App name:worker id:0 online
+PM2: 2016-06-30 14:43:56: Starting execution sequence in -cluster mode- for app name:requests id:1
+PM2: 2016-06-30 14:43:56: App name:requests id:1 online
+PM2: 2016-06-30 14:43:56: Starting execution sequence in -cluster mode- for app name:web id:2
+PM2: 2016-06-30 14:43:57: App name:web id:2 online
+PM2: 2016-06-30 14:43:57: Starting execution sequence in -cluster mode- for app name:parser id:3
+PM2: 2016-06-30 14:43:57: App name:parser id:3 online
+PM2: 2016-06-30 14:43:57: Starting execution sequence in -cluster mode- for app name:retriever id:4
+PM2: 2016-06-30 14:43:57: App name:retriever id:4 online
+
+retriever-4 (err):     at new BigNumber (/usr/src/yasp/node_modules/bignumber.js/bignumber.js:195:67)
+retriever-4 (err):     at Dota2Client.ToAccountID (/usr/src/yasp/node_modules/dota2/index.js:101:12)
+retriever-4 (err):     at Dota2Client.launch (/usr/src/yasp/node_modules/dota2/index.js:111:27)
+retriever-4 (err):     at SteamClient.<anonymous> (/usr/src/yasp/svc/retriever.js:129:22)
+retriever-4 (err):     at emitOne (events.js:95:20)
+retriever-4 (err):     at SteamClient.emit (events.js:182:7)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:281:8)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err): (node) warning: possible EventEmitter memory leak detected. 11 ready listeners added. Use emitter.setMaxListeners() to increase limit.
+retriever-4 (err): Trace
+retriever-4 (err):     at Dota2Client.addListener (events.js:252:17)
+retriever-4 (err):     at Dota2Client.once (events.js:278:8)
+retriever-4 (err):     at SteamClient.<anonymous> (/usr/src/yasp/svc/retriever.js:123:22)
+retriever-4 (err):     at emitOne (events.js:95:20)
+retriever-4 (err):     at SteamClient.emit (events.js:182:7)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:281:8)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:259:10)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err):     at emitOne (events.js:90:13)
+
+retriever-4 (out): relogging
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 76561198280436389
+retriever-4 (out): relogging
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 0
+retriever-4 (out): relogging
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [STEAM] Logged on 0
+retriever-4 (out): relogging
+retriever-4 (out): [RETRIEVER] listening at http://:::5100
+
+requests-1 (out): waiting for parse job 1, currently in active
+requests-1 (out): waiting for parse job 2, currently in waiting
+requests-1 (out): waiting for parse job 1, currently in active
+requests-1 (out): waiting for parse job 2, currently in waiting
+requests-1 (out): waiting for parse job 1, currently in active
+requests-1 (out): waiting for parse job 2, currently in waiting
+requests-1 (out): waiting for parse job 1, currently in completed
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in active
+requests-1 (out): waiting for parse job 2, currently in completed
+
+parser-3 (out): {"url":"http://localhost:5200/redis/de933f4a","state":{"time":{"elapsed":18.229,"remaining":6.692},"speed":1840705.7984530146,"percentage":0.7314667171369634,"size":{"total":45872526,"transferred":33554226}}}
+parser-3 (out): {"url":"http://localhost:5200/redis/de933f4a","state":{"time":{"elapsed":19.228,"remaining":4.763},"speed":1912080.8196380278,"percentage":0.8014707975750016,"size":{"total":45872526,"transferred":36765490}}}
+parser-3 (out): {"url":"http://localhost:5200/redis/de933f4a","state":{"time":{"elapsed":20.227,"remaining":3.021},"speed":1973165.471894003,"percentage":0.8700462233102227,"size":{"total":45872526,"transferred":39911218}}}
+parser-3 (out): {"url":"http://localhost:5200/redis/de933f4a","state":{"time":{"elapsed":21.227,"remaining":1.562},"speed":2012967.7297781128,"percentage":0.9314783755313584,"size":{"total":45872526,"transferred":42729266}}}
+parser-3 (out): received epilogue
+parser-3 (out): total time taken: 22.099
+parser-3 (out): 
+parser-3 (out): time spent on post-processing match : 2294.744ms
+parser-3 (out): saving uploaded parse
+parser-3 (out): generating player analysis: 44.380ms
+parser-3 (out): DEBUG: Insert match_id:2435514735 for user_id:sample_user.
+parser-3 (out): DEBUG: matches result{"matches":[{"match_id":2431090400}]}
+parser-3 (out): DEBUG: not empty match list
+parser-3 (out): DEBUG: saving to USERLIST stringify:[{"match_id":2431090400},{"match_id":2435514735}]
+parser-3 (out): DEBUG: saving to MATCHLIST results:1
+parser-3 (out): DEBUG: MATCHLIST result:undefined
+parser-3 (out): DEBUG: adding new user_array
+parser-3 (out): DEBUG: user_array:[{"user_id":"sample_user"}]
+parser-3 (out): DEBUG:ERROR: error: insert into "my_match_list" ("match_id", "users_allowed") values ($1, $2) - malformed array literal: "[{"user_id":"sample_user"}]"
+parser-3 (out): created cache jobId: 2
+
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+
+worker-0 (out): Thu Jun 30 2016 14:44:01 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 (out): cleaned 0 completed jobs from queue request
+worker-0 (out): cleaned 0 completed jobs from queue request
+worker-0 (out): cleaned 0 completed jobs from queue request
+worker-0 (out): cleaned 0 completed jobs from queue mmr
+worker-0 (out): cleaned 0 completed jobs from queue mmr
+worker-0 (out): cleaned 0 completed jobs from queue mmr
+worker-0 (out): cleaned 0 completed jobs from queue parse
+worker-0 (out): cleaned 0 completed jobs from queue parse
+worker-0 (out): cleaned 0 completed jobs from queue parse
+worker-0 (out): cleaned 0 completed jobs from queue cache
+worker-0 (out): cleaned 0 completed jobs from queue cache
+worker-0 (out): cleaned 0 completed jobs from queue cache
+worker-0 (out): cleanQueues: 1003.767ms
+worker-0 (out): saving sets to redis
+worker-0 (out): set build complete
+worker-0 (out): doBuildSets: 1141.571ms
+worker-0 (out): buildDistributions: 1110.994ms
+worker-0 (out): invalid response, retrying: http://localhost:5100/?key=&mmstats=1
+worker-0 (out): Thu Jun 30 2016 14:44:01 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&mmstats=1
+
+requests-1 (err):     at _combinedTickCallback (internal/process/next_tick.js:74:11)
+requests-1 (err):     at process._tickDomainCallback (internal/process/next_tick.js:122:9)
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+requests-1 (err):     at RedisClient.on_error (/usr/src/yasp/node_modules/bull/node_modules/redis/index.js:196:24)
+requests-1 (err):     at Socket.<anonymous> (/usr/src/yasp/node_modules/bull/node_modules/redis/index.js:106:14)
+requests-1 (err):     at emitOne (events.js:90:13)
+requests-1 (err):     at Socket.emit (events.js:182:7)
+requests-1 (err):     at emitErrorNT (net.js:1249:8)
+requests-1 (err):     at _combinedTickCallback (internal/process/next_tick.js:74:11)
+requests-1 (err):     at process._tickDomainCallback (internal/process/next_tick.js:122:9)
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/user_db
+parser-3 (err): { [Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379]
+parser-3 (err):   code: 'ECONNREFUSED',
+parser-3 (err):   errno: 'ECONNREFUSED',
+parser-3 (err):   syscall: 'connect',
+parser-3 (err):   address: '127.0.0.1',
+parser-3 (err):   port: 6379 }
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/user_db
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/user_db
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/user_db
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/user_db
+
+web-2 (out): i file:[object Object]
+web-2 (out): i:0.key:563a46cf
+web-2 (out): match array:0:[object Object]
+web-2 (out): created request jobId: 1
+web-2 (out): anonymous visit /, ip 10.0.2.2
+web-2 (out): Received kill signal, shutting down gracefully.
+web-2 (out): [WEB] listening on 5000
+web-2 (out): anonymous visit /upload, ip 10.0.2.2
+web-2 (out): anonymous visit /api/upload_files, ip 10.0.2.2
+web-2 (out): i file:[object Object]
+web-2 (out): i:0.key:878d428c
+web-2 (out): i file:[object Object]
+web-2 (out): i:1.key:de933f4a
+web-2 (out): match array:0:[object Object]
+web-2 (out): match array:1:[object Object]
+web-2 (out): created request jobId: 1
+web-2 (out): created request jobId: 2
+web-2 (out): anonymous visit /, ip 10.0.2.2
+web-2 (out): Received kill signal, shutting down gracefully.
+web-2 (out): [WEB] listening on 5000
+
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): { [Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379]
+web-2 (err):   code: 'ECONNREFUSED',
+web-2 (err):   errno: 'ECONNREFUSED',
+web-2 (err):   syscall: 'connect',
+web-2 (err):   address: '127.0.0.1',
+web-2 (err):   port: 6379 }
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+
+[PM2] Streaming realtime logs for [all] processes 
+
+retriever-4 [RETRIEVER] listening at http://:::5100
+worker-0 { error: 'No accounts ready' }
+worker-0 mmStats: 2202.290ms
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Thu Jun 30 2016 14:44:07 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+web-2 anonymous visit /upload, ip 10.0.2.2
+web-2 anonymous visit /api/upload_files, ip 10.0.2.2
+web-2 i file:[object Object]
+web-2 i:0.key:a4a8e071
+web-2 i file:[object Object]
+web-2 i:1.key:f5490c96
+web-2 match array:0:[object Object]
+web-2 match array:1:[object Object]
+web-2 created request jobId: 1
+web-2 created request jobId: 2
+parser-3 parse job: 1
+requests-1 created parse jobId: 1
+requests-1 created parse jobId: 2
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":1.488,"remaining":115.937},"speed":308162.63440860214,"percentage":0.012671945331222751,"size":{"total":36185920,"transferred":458546}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+web-2 anonymous visit /, ip 10.0.2.2
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":2.489,"remaining":150.265},"speed":236889.51386098837,"percentage":0.01629412766070339,"size":{"total":36185920,"transferred":589618}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":3.489,"remaining":124.969},"speed":281695.041559186,"percentage":0.027160674649145303,"size":{"total":36185920,"transferred":982834}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":4.488,"remaining":98.778},"speed":350413.99286987516,"percentage":0.04346049513180817,"size":{"total":36185920,"transferred":1572658}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":5.488,"remaining":57.646},"speed":573163.6297376093,"percentage":0.08692668308557583,"size":{"total":36185920,"transferred":3145522}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":6.489,"remaining":36.166},"speed":848330.7135151796,"percentage":0.1521259650162273,"size":{"total":36185920,"transferred":5504818}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":7.489,"remaining":30.449},"speed":953828.014421151,"percentage":0.19740324413473528,"size":{"total":36185920,"transferred":7143218}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":8.491,"remaining":27.028},"speed":1018790.0129548934,"percentage":0.2390583409237626,"size":{"total":36185920,"transferred":8650546}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":9.49,"remaining":23.886},"speed":1084188.1981032665,"percentage":0.2843356200422706,"size":{"total":36185920,"transferred":10288946}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":10.489,"remaining":20.817},"speed":1155873.2004957574,"percentage":0.33504617265499953,"size":{"total":36185920,"transferred":12123954}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":11.489,"remaining":18.435},"speed":1209280.7032813996,"percentage":0.3839456341029881,"size":{"total":36185920,"transferred":13893426}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":12.489,"remaining":14.034},"speed":1364332.9329810233,"percentage":0.47087801001052343,"size":{"total":36185920,"transferred":17039154}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":13.488,"remaining":9.932},"speed":1545095.0474495848,"percentage":0.575921297565462,"size":{"total":36185920,"transferred":20840242}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":14.487,"remaining":7.016},"speed":1682831.9182715537,"percentage":0.6737202204614391,"size":{"total":36185920,"transferred":24379186}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":15.487,"remaining":5.069},"speed":1760364.8221088655,"percentage":0.7534082317100131,"size":{"total":36185920,"transferred":27262770}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":16.486,"remaining":3.006},"speed":1856430.061870678,"percentage":0.8457738811117694,"size":{"total":36185920,"transferred":30605106}}}
+parser-3 {"url":"http://localhost:5200/redis/a4a8e071","state":{"time":{"elapsed":17.486,"remaining":1.081},"speed":1948902.77936635,"percentage":0.9417617128430064,"size":{"total":36185920,"transferred":34078514}}}
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 received epilogue
+parser-3 total time taken: 17.847
+requests-1 waiting for parse job 1, currently in active
+requests-1 waiting for parse job 2, currently in waiting
+parser-3 time spent on post-processing match : 1934.741ms
+parser-3 saving uploaded parse
+parser-3 generating player analysis: 59.326ms
+parser-3 DEBUG: Insert match_id:2431090400 for user_id:sample_user.
+parser-3 DEBUG: matches result{"matches":null}
+parser-3 DEBUG: empty match list
+parser-3 DEBUG: saving to USERLIST stringify:[{"match_id":2431090400}]
+parser-3 DEBUG: saving to MATCHLIST results:1
+parser-3 DEBUG: MATCHLIST result:undefined
+parser-3 DEBUG: adding new user_array
+parser-3 DEBUG: user_array:[{"user_id":"sample_user"}]
+parser-3 created cache jobId: 1
+parser-3 parse job: 2
+requests-1 waiting for parse job 1, currently in completed
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":1.45,"remaining":143.607},"speed":316238.6206896552,"percentage":0.009996092214324539,"size":{"total":45872526,"transferred":458546}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":2.449,"remaining":188.084},"speed":240758.67701102493,"percentage":0.012853401619958753,"size":{"total":45872526,"transferred":589618}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":3.449,"remaining":157.529},"speed":284962.017976225,"percentage":0.021425329836861393,"size":{"total":45872526,"transferred":982834}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":4.448,"remaining":125.295},"speed":353565.1978417266,"percentage":0.034283222162215354,"size":{"total":45872526,"transferred":1572658}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":5.448,"remaining":85.354},"speed":505195.6681350954,"percentage":0.05999900681292327,"size":{"total":45872526,"transferred":2752306}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":6.448,"remaining":68.778},"speed":609794.3548387097,"percentage":0.08571479146363119,"size":{"total":45872526,"transferred":3931954}}}
+requests-1 waiting for parse job 2, currently in active
+worker-0 invalid response, retrying: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+worker-0 Thu Jun 30 2016 14:44:52 GMT+0000 (UTC) - getData: http://api.steampowered.com/IDOTA2Fantasy_570/GetProPlayerList/v1/?key=32BB2EB71F811BBC3D14A85AF383320B
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":7.448,"remaining":51.796},"speed":774296.7239527389,"percentage":0.12571712314251018,"size":{"total":45872526,"transferred":5766962}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":8.448,"remaining":44.35},"speed":868824.1003787878,"percentage":0.16000483601012075,"size":{"total":45872526,"transferred":7339826}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":9.448,"remaining":34.349},"speed":1047388.8653683319,"percentage":0.2157223694199879,"size":{"total":45872526,"transferred":9895730}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":10.449,"remaining":29.301},"speed":1154026.031199158,"percentage":0.2628679746129524,"size":{"total":45872526,"transferred":12058418}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":11.449,"remaining":26.532},"speed":1207781.465630186,"percentage":0.3014416515890143,"size":{"total":45872526,"transferred":13827890}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":12.448,"remaining":24.162},"speed":1253001.446015424,"percentage":0.34001532856507616,"size":{"total":45872526,"transferred":15597362}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":13.447,"remaining":21.674},"speed":1306123.4476091322,"percentage":0.3828749696495894,"size":{"total":45872526,"transferred":17563442}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":14.446,"remaining":18.816},"speed":1379117.9565277586,"percentage":0.43430653895100524,"size":{"total":45872526,"transferred":19922738}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":15.446,"remaining":15.444},"speed":1485005.4383011784,"percentage":0.5000246552805921,"size":{"total":45872526,"transferred":22937394}}}
+worker-0 running doBuildSets
+worker-0 rebuilding sets
+worker-0 saving sets to redis
+worker-0 set build complete
+worker-0 doBuildSets: 13.608ms
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":16.446,"remaining":12.478},"speed":1585985.7716161984,"percentage":0.5686000810158133,"size":{"total":45872526,"transferred":26083122}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":17.446,"remaining":10.308},"speed":1652850.7394245097,"percentage":0.6286035785341317,"size":{"total":45872526,"transferred":28835634}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":18.448,"remaining":8.51},"speed":1701622.8317432783,"percentage":0.6843211119439989,"size":{"total":45872526,"transferred":31391538}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":19.448,"remaining":6.334},"speed":1779247.3262032084,"percentage":0.7543251923820371,"size":{"total":45872526,"transferred":34602802}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":20.447,"remaining":4.018},"speed":1875011.1996869957,"percentage":0.8357585104426122,"size":{"total":45872526,"transferred":38338354}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":21.452,"remaining":2.047},"speed":1952139.5674063023,"percentage":0.912905864394736,"size":{"total":45872526,"transferred":41877298}}}
+parser-3 {"url":"http://localhost:5200/redis/f5490c96","state":{"time":{"elapsed":22.45,"remaining":0.39},"speed":2008399.1982182628,"percentage":0.9829099448327742,"size":{"total":45872526,"transferred":45088562}}}
+requests-1 waiting for parse job 2, currently in active
+parser-3 received epilogue
+parser-3 total time taken: 
+parser-3 22.497
+requests-1 waiting for parse job 2, currently in active
+parser-3 time spent on post-processing match : 2912.690ms
+parser-3 saving uploaded parse
+parser-3 generating player analysis: 78.799ms
+parser-3 DEBUG: Insert match_id:2435514735 for user_id:sample_user.
+parser-3 DEBUG: matches result{"matches":[{"match_id":2431090400}]}
+parser-3 DEBUG: not empty match list
+parser-3 DEBUG: saving to USERLIST stringify:[{"match_id":2431090400},{"match_id":2435514735}]
+parser-3 DEBUG: saving to MATCHLIST results:1
+parser-3 DEBUG: MATCHLIST result:undefined
+parser-3 DEBUG: adding new user_array
+parser-3 DEBUG: user_array:[{"user_id":"sample_user"}]
+parser-3 created cache jobId: 2
+requests-1 waiting for parse job 2, currently in completed

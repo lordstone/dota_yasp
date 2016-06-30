@@ -4,7 +4,7 @@ CREATE TABLE my_users (
 	user_id varchar(30) PRIMARY KEY,
 	invitation_code varchar(30) not null,
 	password varchar(30) not null,
-	matches json[],
+	matches json,
 	is_logged boolean default false not null
 );
 

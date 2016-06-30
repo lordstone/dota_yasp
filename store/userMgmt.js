@@ -274,17 +274,20 @@ function saveMatchToUser(db, user_id, match_id){
 		console.log('DEBUG: matches result' + JSON.stringify(result));
 		// var match_array = result;
 		if(!result || result == undefined || !result['matches'] || result['matches'] == null){
+			// if it is an empty one
 			console.log('DEBUG: empty match list');
 			var match_array = [{
-						match_id: match_id
+				match_id: match_id
 			}];
 			// match_array = {matches: match_array};
 			result = match_array;
 		}else{
+			// if you need to push in
 			console.log('DEBUG: not empty match list');
 			result['matches'].push({
 				match_id: match_id
 			});
+			result = result['matches'];
 		}
 		console.log('DEBUG: saving to USERLIST stringify:' + JSON.stringify(result));
 		return db.table('my_users').where({
@@ -298,16 +301,19 @@ function saveMatchToUser(db, user_id, match_id){
 		db.table('my_match_list').first('users_allowed').where({
 			match_id: match_id
 		}).asCallback(function(err, result){
+ 	    console.log('DEBUG: MATCHLIST result:' + JSON.stringify(result));	
 			if(result && result != undefined){
-    	    //console.log('DEBUG: result:' + result + '.result.length:' + result.length + '.' );
 					var user_array = result;
 					for(var i = 0; i < user_array.length; i ++){
 						if(user_array[i] == user_id){
+							console.log('DEBUG: found exising user_id in matchlist');
 							return;
 						}
 					}
-					user_array.push({user_id: user_id});
-					db.table('my_match_list').where({
+					console.log('DEBUG: not found existing user_id');
+					user_array['users_allowed'].push({user_id: user_id});
+					user_array = user_array['users_allowed'];
+					return db.table('my_match_list').where({
 						match_id: match_id
 					}).update({
 						users_allowed: JSON.stringify(user_array)
@@ -318,10 +324,11 @@ function saveMatchToUser(db, user_id, match_id){
 						return;
 					});
 			}else{
-				var user_array = result;
-				user_array.push({user_id: user_id});
+				// if nothing there
+				console.log('DEBUG: adding new user_array');
+				var user_array = [{user_id: user_id}];
 				console.log('DEBUG: user_array:' + JSON.stringify(user_array));
-				db.table('my_match_list').insert({
+				return db.table('my_match_list').insert({
 					match_id: match_id,
 					users_allowed: JSON.stringify(user_array)
 				}).asCallback(function(err, result){
