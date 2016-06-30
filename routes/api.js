@@ -215,7 +215,7 @@ api.post('/upload_files', multer.array("replay_blob", 20), function(req, res, ne
         	    redis.setex(new Buffer('upload_blob:' + key), 60 * 60, req.files[i].buffer);
                     match[i] = {
             	         replay_blob_key: key,
-                         owner: user_id
+                         user_id: user_id
               	    };
                 } //  end for each file in files
             }
@@ -324,7 +324,7 @@ api.post('/upload_files', multer.array("replay_blob", 20), function(req, res, ne
                 redis.setex(new Buffer('upload_blob:' + key), 60 * 60, req.file.buffer);
                 match = {
                     replay_blob_key: key,
-                    owner: user_id
+                    user_id: user_id
                 };
             }
             else if (match_id && !Number.isNaN(match_id))

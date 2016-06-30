@@ -1,20 +1,18 @@
-
 // var async = require('async');
 var config = require('../config');
 
 function logUser(db, user_id, password,  cb){
 	console.log("logging user");
-	db.select().from('my_users').where({
+	db.first().from('my_users').where({
 		user_id: user_id,
 		password: password
-	}).asCallback(function(err, result){
+	}).asCallback(function(err, res){
 		if(err){
 			return cb('failed', err);
 		}
-		if(!result){
+		if(!res){
 			return cb('failed', 'unknown error');
 		}
-		result.forEach(function(res){
 			if(res.is_logged){
 					return cb('logged');
 			}else{
@@ -29,7 +27,6 @@ function logUser(db, user_id, password,  cb){
 					});
 					//return cb('success', {user:id: result.user_id});
 			}
-		});
 	});	
 }
 
@@ -49,14 +46,12 @@ function logoutUser(db, user_id, cb){
 
 function findUser(db, user_id, cb){
 	console.log("finding user");
-	db.select().from('my_users').where('user_id', '=', user_id).asCallback(function(err, result){
+	db.first().from('my_users').where('user_id', '=', user_id).asCallback(function(err, result){
 		if(err){
 			return cb(err);
 		}
 		var t = null;
-		result.forEach(function(result){
-			t = result;
-		});
+		t = result;
 		return cb(err, t);
 	});	
 }
@@ -185,14 +180,12 @@ function findAll_inv(db, cb){
 
 function findInv(db, invitation_code, cb){
 	console.log("finding invitation code");
-	db.select().from('my_invitation_codes').where('invitation_code', '=', invitation_code).asCallback(function(err, result){
+	db.first().from('my_invitation_codes').where('invitation_code', '=', invitation_code).asCallback(function(err, result){
 		if(err){
 			return cb(err);
 		}
 		var t = null;
-		result.forEach(function(result){
-			t = result;
-		});
+		t = result;
 		return cb(err, t);
 	});	
 }
@@ -248,6 +241,7 @@ function editInv(db, new_inv, old_invitation_code, cb){
 }
 
 function checkMatchId(db, user_id, match_id){
+	console.log('DEBUG: find the match list log');
 	db.table('my_match_list').select('users_allowed').where({
 		match_id: match_id
 	}).asCallback(function(err, result){
@@ -259,8 +253,9 @@ function checkMatchId(db, user_id, match_id){
 				//meaning public match
 				return true;
 			}else{
-				 var user_array = result[0];
-				for(int i = 0; i < user_array.length; i ++){
+				var user_array = result;
+				console.log('DEBUG: output user_array:'+user_array);
+				for(var i = 0; i < user_array.length; i++){
 					if(user_array[i].user_id == user_id){
 						return true;
 					}
@@ -272,36 +267,79 @@ function checkMatchId(db, user_id, match_id){
 }
 
 function saveMatchToUser(db, user_id, match_id){
-	db.table('my_match_list').select('users_allowed').where({
-		match_id: match_id
-	}).asCallback(function(err, result){
-		if(result){
-				var user_array = result[0];
-				for(int i = 0; i < user_array.length; i ++){
-					if(user_array[i] == user_id){
-						return;
+	console.log('DEBUG: Insert match_id:' + match_id + ' for user_id:' + user_id +'.');
+	db.table('my_users').first('matches').where({
+		user_id: user_id
+	}).then(function(result){
+		console.log('DEBUG: matches result' + JSON.stringify(result));
+		// var match_array = result;
+		if(!result || result == undefined || !result['matches'] || result['matches'] == null){
+			console.log('DEBUG: empty match list');
+			var match_array = [{
+						match_id: match_id
+			}];
+			// match_array = {matches: match_array};
+			result = match_array;
+		}else{
+			console.log('DEBUG: not empty match list');
+			result['matches'].push({
+				match_id: match_id
+			});
+		}
+		console.log('DEBUG: saving to USERLIST stringify:' + JSON.stringify(result));
+		return db.table('my_users').where({
+			user_id: user_id
+		}).update({
+			matches: JSON.stringify(result)
+		}); 
+	}).then(function(result){
+		console.log('DEBUG: saving to MATCHLIST results:' + JSON.stringify(result));
+		// Start updating the match list
+		db.table('my_match_list').first('users_allowed').where({
+			match_id: match_id
+		}).asCallback(function(err, result){
+			if(result && result != undefined){
+    	    //console.log('DEBUG: result:' + result + '.result.length:' + result.length + '.' );
+					var user_array = result;
+					for(var i = 0; i < user_array.length; i ++){
+						if(user_array[i] == user_id){
+							return;
+						}
 					}
-				}
+					user_array.push({user_id: user_id});
+					db.table('my_match_list').where({
+						match_id: match_id
+					}).update({
+						users_allowed: JSON.stringify(user_array)
+					}).asCallback(function(err, result){
+						if(err){
+							console.log('update match list in user_db failed');
+						}
+						return;
+					});
+			}else{
+				var user_array = result;
 				user_array.push({user_id: user_id});
-				db.table('my_match_list').where({
-					match_id: match_id
-				}).update({
-					users_allowed: user_array
+				console.log('DEBUG: user_array:' + JSON.stringify(user_array));
+				db.table('my_match_list').insert({
+					match_id: match_id,
+					users_allowed: JSON.stringify(user_array)
 				}).asCallback(function(err, result){
 					if(err){
-						console.log('update match list in user_db failed');
+						console.log('DEBUG:ERROR: ' + err);
 					}
 					return;
 				});
-		}else{
-			var user_array = [{user_id: user_id}];
-			db.table('my_match_list').insert({
-				match_id: match_id,
-				users_allowed: user_id	
-			});
-		}
+			}
+		});
+// end of updating match list	
+	}).catch(function(e){
+		console.log('DEBUG:ERROR:Find my_user err: '+ e);
+		return;
 	});
 }
+
+
 
 module.exports = {
 	logUser: logUser,
