@@ -17,8 +17,13 @@ if user
       img.img-responsive(src='../public/images/curlycue.png', style='margin: auto;')
       br
       div#show_matches
-        h3 No matches available. Please go to Upload page to upload some
-              
+				if !match_list
+          h3 No matches available. Please go to Upload page to upload some
+        else
+          table#match_tables
+            title Matches
+            each val, key in match_list
+              tr: a(href="/matches/"+val) Match ID: #(val)      
 
 else
   p Please log out and retry

@@ -346,7 +346,16 @@ function saveMatchToUser(db, user_id, match_id){
 	});
 }
 
-
+function getMatchList(db, user_id, cb){
+	db.table('my_users').first('matches').where({
+		user_id: user_id
+	}).asCallback(function(results){
+		return cb(results);
+	}).catch(function(e){
+		console.log('DEBUG: getMatchList error:' + e);
+		return JSON.stringify({error: e});
+	});
+}
 
 module.exports = {
 	logUser: logUser,
@@ -363,6 +372,7 @@ module.exports = {
 	editInv: editInv,
 	deleteInv: deleteInv,
 	checkMatchId: checkMatchId,
-	saveMatchToUser: saveMatchToUser
+	saveMatchToUser: saveMatchToUser,
+	getMatchList: getMatchList
 };
 

@@ -100,8 +100,8 @@ window.uploadSubmit = function submit(response)
             document.getElementById("upload-bar").innerHTML = prog.toFixed(2) + "% uploaded";
             // skip the parsing phase
             if(prog >= 100){
-                 alert('Upload Success');
-                 window.location.assign("/");  
+                 document.getElementById("upload-bar").innerHTML = 'Upload Successful. Going to center...';
+                 window.location.assign("/center");  
             }
 			// total uploaded
             // var totalProg = oEvent.loaded / oEvent.total * 100;

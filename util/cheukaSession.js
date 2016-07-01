@@ -155,6 +155,13 @@ function saveMatchToUser(db, user_id, match_id){
 	return user_mgmt.saveMatchToUser(db, user_id, match_id);
 }
 
+function getMatchList(db, user_id, cb){
+	user_mgmt.getMatchList(db, user_id, function(res)
+	{
+		return cb(res);
+	});
+}
+
 module.exports = {
 	findAll: findAll,
 	findUser: findUser,
@@ -170,5 +177,6 @@ module.exports = {
 	deleteInv: deleteInv,
 	logoutUser: logoutUser,
 	checkMatchId: checkMatchId,
-	saveMatchToUser: saveMatchToUser
+	saveMatchToUser: saveMatchToUser,
+	getMatchList: getMatchList
 };
