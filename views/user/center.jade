@@ -16,14 +16,16 @@ if user
       h3 控制中心：所有私有比赛
       img.img-responsive(src='../public/images/curlycue.png', style='margin: auto;')
       br
+      // p JSON: #{match_json}
       div#show_matches
-				if !match_list
+        if !match_list.matches
           h3 No matches available. Please go to Upload page to upload some
         else
           table#match_tables
             title Matches
-            each val, key in match_list
-              tr: a(href="/matches/"+val) Match ID: #(val)      
+            each obj in match_list.matches
+              tr
+                td: a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
 
 else
   p Please log out and retry
@@ -34,14 +36,5 @@ append footer_assets
   script(src="/public/js/home/scroll.js")
   script(src="/public/js/home/animatedNavbar.js")
   script(src="/public/js/home/polymerFabs.js")
-  script.
-  //  var graphData = !{JSON.stringify(match.graphData)};
-  script(type='text/javascript').
-    document.form1.submit() = function(){
-     if(file_ul.childNodes.length() == 0){           
-       alert('Please select files to upload');
-         return false
-     }
-        return true;
-    }
-  // generateCharts(graphData);
+  script(src="/public/js/user/center.js")
+

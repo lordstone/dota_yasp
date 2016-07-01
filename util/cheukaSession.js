@@ -156,9 +156,8 @@ function saveMatchToUser(db, user_id, match_id){
 }
 
 function getMatchList(db, user_id, cb){
-	user_mgmt.getMatchList(db, user_id, function(res)
-	{
-		return cb(res);
+	user_mgmt.getMatchList(db, user_id, function(results){
+		return cb(results);
 	});
 }
 

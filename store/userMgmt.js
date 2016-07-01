@@ -349,7 +349,11 @@ function saveMatchToUser(db, user_id, match_id){
 function getMatchList(db, user_id, cb){
 	db.table('my_users').first('matches').where({
 		user_id: user_id
-	}).asCallback(function(results){
+	}).asCallback(function(err, results){
+		if(err){
+			return cb(JSON.stringify({error: e}));
+		}
+		console.log('DEBUG: match result:' + JSON.stringify(results));
 		return cb(results);
 	}).catch(function(e){
 		console.log('DEBUG: getMatchList error:' + e);
