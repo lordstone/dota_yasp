@@ -40,6 +40,8 @@ var rc_public = config.RECAPTCHA_PUBLIC_KEY;
 // just for testing
 var cheuka_session = require('../util/cheukaSession');
 var user_db = require('../store/user_db');
+// cheuka route
+var cheuka_admin = require('../routes/cheuka_admin');
 
 //PASSPORT config
 passport.serializeUser(function(user, done)
@@ -222,6 +224,9 @@ app.route('/return').get(passport.authenticate('steam',
         res.redirect('/players/' + req.user.account_id);
     }
 });
+
+//app.use('/logout', cheuka(db, redis, cassandra));
+
 app.route('/logout').get(function(req, res)
 {
     req.logout();
@@ -235,6 +240,7 @@ app.route('/logout').get(function(req, res)
     	res.redirect('/');
 		}
 });
+
 app.use('/api', api(db, redis, cassandra));
 //END service/admin routes
 //START standard routes.
@@ -242,6 +248,11 @@ app.use('/api', api(db, redis, cassandra));
 
 // user mgmt: lordstone
 
+// self defined for cheuka dota admin
+
+app.use('/admin', cheuka_admin(db, redis, cassandra));
+
+/*
 app.route('/admin').get(function(req, res, next)
 {
 // lordstone
@@ -549,7 +560,7 @@ app.route('/admin/delete_inv/:inv_code').get(function(req, res, next)
 	}		
 }); 
 
-
+*/
 
 //end of invitation code
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 bower_components
 .env
 prod.env
@@ -26,3 +27,9 @@ dependency-reduced-pom.xml
 kubernetes
 yasp.sql
 Procfile.dev
+=======
+node_modules/
+local_test/
+local_test/*
+saved_data/
+>>>>>>> ccbb52778ecf580e9b78d68d62c98713852a1710
