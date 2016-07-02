@@ -145,7 +145,7 @@ function insertUploadedParse(match, cb)
 		// lordstone: save picks_bans:
 		console.log('DEBUG: upload ban pick');
 		match.picks_bans = match.upload.picks_bans;
-		console.log('DEBUG: pick bans:' + JSON.stringify(match.picks_bans));
+		//console.log('DEBUG: pick bans:' + JSON.stringify(match.picks_bans));
 		console.log('DEBUG: upload ban pick successfully');
 
     match.players.forEach(function(p, i)
