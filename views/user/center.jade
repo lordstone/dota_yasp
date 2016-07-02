@@ -21,11 +21,13 @@ if user
         if !match_list.matches
           h3 No matches available. Please go to Upload page to upload some
         else
-          table#match_tables
-            title Matches
-            each obj in match_list.matches
-              tr
-                td: a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
+          .row
+            .col-md-12
+              table#match_tables(style="margin: auto;") 
+                title Matches
+                each obj in match_list.matches
+                  tr
+                    td: a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
 
 else
   p Please log out and retry
