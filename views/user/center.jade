@@ -25,9 +25,20 @@ if user
             .col-md-12
               table#match_tables(style="margin: auto;") 
                 title Matches
-                each obj in match_list.matches
-                  tr
-                    td: a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
+                thead
+                  td Match ID
+                  td Overviews
+                  td Details
+                  td Actions
+                tbody
+                each obj, num in match_list.matches
+                  tr.match_entry
+                    td
+                      a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
+                    td Loading Overviews
+                    td Loading Details
+                    td
+                      a(href="/matches/delete/" + obj.match_id) Delete this Match
 
 else
   p Please log out and retry

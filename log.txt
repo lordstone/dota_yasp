@@ -1,0 +1,241 @@
+[PM2] Tailing last 20 lines for [all] processes 
+
+PM2: 2016-07-02 23:21:42: App [requests] with id [1] and pid [16632], exited with code [0] via signal [SIGINT]
+PM2: 2016-07-02 23:21:43: Stopping app:web id:2
+PM2: 2016-07-02 23:21:43: App name:web id:2 disconnected
+PM2: 2016-07-02 23:21:43: App [web] with id [2] and pid [16654], exited with code [0] via signal [SIGINT]
+PM2: 2016-07-02 23:21:43: Stopping app:parser id:3
+PM2: 2016-07-02 23:21:43: App name:parser id:3 disconnected
+PM2: 2016-07-02 23:21:43: App [parser] with id [3] and pid [16676], exited with code [0] via signal [SIGINT]
+PM2: 2016-07-02 23:21:43: Stopping app:retriever id:4
+PM2: 2016-07-02 23:21:43: App name:retriever id:4 disconnected
+PM2: 2016-07-02 23:21:43: App [retriever] with id [4] and pid [18028], exited with code [0] via signal [SIGINT]
+PM2: 2016-07-02 23:23:36: Starting execution sequence in -cluster mode- for app name:worker id:0
+PM2: 2016-07-02 23:23:36: App name:worker id:0 online
+PM2: 2016-07-02 23:23:36: Starting execution sequence in -cluster mode- for app name:requests id:1
+PM2: 2016-07-02 23:23:36: App name:requests id:1 online
+PM2: 2016-07-02 23:23:36: Starting execution sequence in -cluster mode- for app name:web id:2
+PM2: 2016-07-02 23:23:37: App name:web id:2 online
+PM2: 2016-07-02 23:23:37: Starting execution sequence in -cluster mode- for app name:parser id:3
+PM2: 2016-07-02 23:23:37: App name:parser id:3 online
+PM2: 2016-07-02 23:23:37: Starting execution sequence in -cluster mode- for app name:retriever id:4
+PM2: 2016-07-02 23:23:37: App name:retriever id:4 online
+
+retriever-4 (err):     at Dota2Client.once (events.js:278:8)
+retriever-4 (err):     at SteamClient.<anonymous> (/usr/src/yasp/svc/retriever.js:123:22)
+retriever-4 (err):     at emitOne (events.js:95:20)
+retriever-4 (err):     at SteamClient.emit (events.js:182:7)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:281:8)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:259:10)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+retriever-4 (err):     at emitOne (events.js:90:13)
+retriever-4 (err): BigNumber Error: new BigNumber() not a number: undefined
+retriever-4 (err):     at raise (/usr/src/yasp/node_modules/bignumber.js/bignumber.js:1181:25)
+retriever-4 (err):     at /usr/src/yasp/node_modules/bignumber.js/bignumber.js:1169:33
+retriever-4 (err):     at new BigNumber (/usr/src/yasp/node_modules/bignumber.js/bignumber.js:195:67)
+retriever-4 (err):     at Dota2Client.ToAccountID (/usr/src/yasp/node_modules/dota2/index.js:101:12)
+retriever-4 (err):     at Dota2Client.launch (/usr/src/yasp/node_modules/dota2/index.js:111:27)
+retriever-4 (err):     at SteamClient.<anonymous> (/usr/src/yasp/svc/retriever.js:129:22)
+retriever-4 (err):     at emitOne (events.js:95:20)
+retriever-4 (err):     at SteamClient.emit (events.js:182:7)
+retriever-4 (err):     at SteamClient.handlers.(anonymous function) (/usr/src/yasp/node_modules/steam/lib/steam_client.js:281:8)
+retriever-4 (err):     at SteamClient._netMsgReceived (/usr/src/yasp/node_modules/steam/lib/steam_client.js:157:26)
+
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+requests-1 (err): connecting redis://127.0.0.1:6379/0
+requests-1 (err): connecting postgresql://postgres:postgres@localhost/yasp
+
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): Error: getaddrinfo EAI_AGAIN cdn.dota2.com:80
+web-2 (err):     at Object.exports._errnoException (util.js:890:11)
+web-2 (err):     at errnoException (dns.js:31:15)
+web-2 (err):     at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+web-2 (err): connecting redis://127.0.0.1:6379/0
+web-2 (err): connecting postgresql://postgres:postgres@localhost/yasp
+web-2 (err): connecting postgresql://postgres:postgres@localhost/user_db
+
+parser-3 (err): TypeError: Cannot read property 'dota_' of undefined
+parser-3 (err):     at processUploadProps (/usr/src/yasp/processors/processUploadProps.js:18:55)
+parser-3 (err):     at DestroyableTransform.exit (/usr/src/yasp/svc/parser.js:296:30)
+parser-3 (err):     at emitNone (events.js:85:20)
+parser-3 (err):     at DestroyableTransform.emit (events.js:179:7)
+parser-3 (err):     at /usr/src/yasp/node_modules/through2/node_modules/readable-stream/lib/_stream_readable.js:965:16
+parser-3 (err):     at _combinedTickCallback (internal/process/next_tick.js:67:7)
+parser-3 (err):     at process._tickDomainCallback (internal/process/next_tick.js:122:9)
+parser-3 (err): TypeError: Cannot read property 'dota_' of undefined
+parser-3 (err):     at processUploadProps (/usr/src/yasp/processors/processUploadProps.js:18:55)
+parser-3 (err):     at DestroyableTransform.exit (/usr/src/yasp/svc/parser.js:296:30)
+parser-3 (err):     at emitNone (events.js:85:20)
+parser-3 (err):     at DestroyableTransform.emit (events.js:179:7)
+parser-3 (err):     at /usr/src/yasp/node_modules/through2/node_modules/readable-stream/lib/_stream_readable.js:965:16
+parser-3 (err):     at _combinedTickCallback (internal/process/next_tick.js:67:7)
+parser-3 (err):     at process._tickDomainCallback (internal/process/next_tick.js:122:9)
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/yasp
+parser-3 (err): connecting redis://127.0.0.1:6379/0
+parser-3 (err): connecting postgresql://postgres:postgres@localhost/user_db
+parser-3 (err): incomplete
+
+parser-3 (out): {"url":"http://localhost:5200/redis/5635730e","state":{"time":{"elapsed":14.536,"remaining":4.928},"speed":2051367.226197028,"percentage":0.7468250821061995,"size":{"total":39927253,"transferred":29818674}}}
+parser-3 (out): {"url":"http://localhost:5200/redis/5635730e","state":{"time":{"elapsed":15.536,"remaining":2.951},"speed":2159772.5283213183,"percentage":0.8403840354356459,"size":{"total":39927253,"transferred":33554226}}}
+parser-3 (out): {"url":"http://localhost:5200/redis/5635730e","state":{"time":{"elapsed":16.537,"remaining":1.358},"speed":2231152.0832073535,"percentage":0.9240946778883086,"size":{"total":39927253,"transferred":36896562}}}
+parser-3 (out): received epilogue
+parser-3 (out): total time taken: 17.3
+parser-3 (out): 
+parser-3 (out): time spent on post-processing match : 1684.329ms
+parser-3 (out): saving uploaded parse
+parser-3 (out): DEBUG: upload ban pick
+parser-3 (out): DEBUG: upload ban pick successfully
+parser-3 (out): generating player analysis: 67.375ms
+parser-3 (out): DEBUG: Insert match_id:2442042277 for user_id:cheuka.
+parser-3 (out): DEBUG: matches result{"matches":[{"match_id":2435514735},{"match_id":2435648736},{"match_id":2441827955},{"match_id":2441943134}]}
+parser-3 (out): DEBUG: not empty match list
+parser-3 (out): DEBUG: saving to USERLIST stringify:[{"match_id":2435514735},{"match_id":2435648736},{"match_id":2441827955},{"match_id":2441943134},{"match_id":2442042277}]
+parser-3 (out): DEBUG: saving to MATCHLIST results:1
+parser-3 (out): DEBUG: MATCHLIST result:undefined
+parser-3 (out): DEBUG: adding new user_array
+parser-3 (out): DEBUG: user_array:[{"user_id":"cheuka"}]
+parser-3 (out): created cache jobId: 5
+
+requests-1 (out): waiting for parse job 5, currently in active
+requests-1 (out): waiting for parse job 6, currently in waiting
+requests-1 (out): waiting for parse job 5, currently in active
+requests-1 (out): waiting for parse job 6, currently in waiting
+requests-1 (out): waiting for parse job 5, currently in active
+requests-1 (out): waiting for parse job 6, currently in waiting
+requests-1 (out): waiting for parse job 5, currently in active
+requests-1 (out): waiting for parse job 6, currently in waiting
+requests-1 (out): waiting for parse job 5, currently in completed
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in active
+requests-1 (out): waiting for parse job 6, currently in completed
+
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): connecting redis://127.0.0.1:6379/0
+worker-0 (err): connecting postgresql://postgres:postgres@localhost/yasp
+worker-0 (err): { error: 'No accounts ready' }
+worker-0 (err): { error: 'No accounts ready' }
+
+web-2 (out): i:5.key:5635730e
+web-2 (out): match array:0:[object Object]
+web-2 (out): match array:1:[object Object]
+web-2 (out): match array:2:[object Object]
+web-2 (out): match array:3:[object Object]
+web-2 (out): match array:4:[object Object]
+web-2 (out): match array:5:[object Object]
+web-2 (out): created request jobId: 1
+web-2 (out): created request jobId: 2
+web-2 (out): created request jobId: 3
+web-2 (out): created request jobId: 4
+web-2 (out): created request jobId: 5
+web-2 (out): created request jobId: 6
+web-2 (out): DEBUG: match result:{"matches":null}
+web-2 (out): DEBUG: Rendering list:{"matches":null}
+web-2 (out): DEBUG: lists[object Object]
+web-2 (out): anonymous visit /center, ip 10.0.2.2
+web-2 (out): DEBUG: match result:{"matches":[{"match_id":2435514735},{"match_id":2435648736},{"match_id":2441827955},{"match_id":2441943134},{"match_id":2442042277}]}
+web-2 (out): DEBUG: Rendering list:{"matches":[{"match_id":2435514735},{"match_id":2435648736},{"match_id":2441827955},{"match_id":2441943134},{"match_id":2442042277}]}
+web-2 (out): DEBUG: lists[object Object]
+
+worker-0 (out): set build complete
+worker-0 (out): doBuildSets: 9.528ms
+worker-0 (out): running doBuildSets
+worker-0 (out): rebuilding sets
+worker-0 (out): saving sets to redis
+worker-0 (out): set build complete
+worker-0 (out): doBuildSets: 5.348ms
+worker-0 (out): running mmStats
+worker-0 (out): Sat Jul 02 2016 23:26:41 GMT+0000 (UTC) - getData: http://localhost:5100/?key=&mmstats=1
+worker-0 (out): mmStats: 1008.556ms
+worker-0 (out): running doBuildSets
+worker-0 (out): rebuilding sets
+worker-0 (out): saving sets to redis
+worker-0 (out): set build complete
+worker-0 (out): doBuildSets: 14.976ms
+worker-0 (out): running doBuildSets
+worker-0 (out): rebuilding sets
+worker-0 (out): saving sets to redis
+worker-0 (out): set build complete
+worker-0 (out): doBuildSets: 3.234ms
+
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+retriever-4 (out): [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 (out): [Error: Disconnected]
+retriever-4 (out): reconnecting
+
+[PM2] Streaming realtime logs for [all] processes 
+
+retriever-4 [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 [Error: Disconnected]
+retriever-4 reconnecting
+retriever-4 [STEAM] Trying to log on with bdpeter,Rq19881028
+retriever-4 [Error: Disconnected]
+retriever-4 reconnecting
