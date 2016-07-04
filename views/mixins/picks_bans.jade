@@ -1,6 +1,7 @@
 mixin picks_bans_table(picks_bans)
 
   mixin picks_bans_row(picks_bans, team_int)
+    //.row
     each pick in picks_bans
       td(style="padding: 3px;")
         //p team: #{JSON.stringify(pick.team)}
@@ -15,14 +16,10 @@ mixin picks_bans_table(picks_bans)
           else
             = hero_id
 
-  .row
-    .col-md-12
-      h3.inline-header Picks/Bans
-        #picks-bans.table-responsive.collapse.in
-          table.table.table-hover
-            tbody
-              tr
-                +picks_bans_row(match.picks_bans, 2)
-              tr
-                +picks_bans_row(match.picks_bans, 3)
+  //table
+    //tbody
+  tr
+    +picks_bans_row(picks_bans, 2)
+  tr
+    +picks_bans_row(picks_bans, 3)
    

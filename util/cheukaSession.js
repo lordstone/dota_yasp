@@ -161,6 +161,12 @@ function getMatchList(db, user_id, cb){
 	});
 }
 
+function getMatchData(db, user_db, user_id, cb){
+	user_mgmt.getMatchData(db, user_db, user_id, function(results){
+		return cb(results);
+	});
+}
+
 module.exports = {
 	findAll: findAll,
 	findUser: findUser,
@@ -177,5 +183,6 @@ module.exports = {
 	logoutUser: logoutUser,
 	checkMatchId: checkMatchId,
 	saveMatchToUser: saveMatchToUser,
-	getMatchList: getMatchList
+	getMatchList: getMatchList,
+	getMatchData: getMatchData
 };

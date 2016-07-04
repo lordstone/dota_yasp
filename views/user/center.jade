@@ -2,7 +2,7 @@ extend /layout
 include /mixins/hero_td
 include /mixins/data_table
 include /mixins/data_table_header
-
+include /mixins/picks_bans
 
 block head
   //link(rel="import" href="/public/paper-fab-menu.html")
@@ -18,28 +18,33 @@ if user
       br
       // p JSON: #{match_json}
       div#show_matches
-        if !match_list.matches
+        if !match_list
           h3 No matches available. Please go to Upload page to upload some
         else
           .row
             .col-md-12
-              table#match_tables(style="margin: auto;") 
-                title Matches
-                thead
-                  td Match ID
-                  td Overviews
-                  td Details
-                  td Actions
-                tbody
-                each obj, num in match_list.matches
-                  tr.match_entry
-                    td
-                      a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
-                    td Loading Overviews
-                    td Loading Details
-                    td
-                      a(href="/matches/delete/" + obj.match_id) Delete this Match
-
+              +data_table({id:"index", summable:false, heading: "Matches"})
+               //
+                 tr
+                 th Match ID
+                 th Overviews
+                 th Details
+                 th Actions 
+               tbody
+                 each obj in match_list
+                   tr
+                     td.col-md-1
+                       a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
+                     td.col-md-10 
+                     td.col-md-1
+                       a(href="/matches/delete/" + obj.match_id) Delete
+                   
+                   if obj.upload
+                     if obj.upload.picks_bans                         
+                       +picks_bans_table(obj.upload.picks_bans)
+                   else
+                     h3 This match has no Picks/Bans
+                       
 else
   p Please log out and retry
 
@@ -49,5 +54,5 @@ append footer_assets
   script(src="/public/js/home/scroll.js")
   script(src="/public/js/home/animatedNavbar.js")
   script(src="/public/js/home/polymerFabs.js")
-  script(src="/public/js/user/center.js")
+  //script(src="/public/js/user/center.js")
 

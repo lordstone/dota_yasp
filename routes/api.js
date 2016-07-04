@@ -16,6 +16,10 @@ var queries = require('../store/queries');
 var buildMatch = require('../store/buildMatch');
 var buildPlayer = require('../store/buildPlayer');
 var buildStatus = require('../store/buildStatus');
+var querystring = require('querystring');
+
+var cheuka_session = require('../util/cheukaSession');
+var user_db = require('../store/user_db');
 
 const crypto = require('crypto');
 module.exports = function(db, redis, cassandra)
@@ -82,6 +86,31 @@ module.exports = function(db, redis, cassandra)
     {
         res.json(constants.abilities[req.query.name]);
     });
+
+//lordstone: get all private matches for a user
+/*
+		api.post('/brief_match', function(req, res, cb)
+		{
+      if(req.session.user){  
+				var user_id = req.session.user;
+				var formdata = '';
+				req.on('data', function(data){
+		      formdata += data;
+    		});
+   			req.on('end', function(){
+					var options = querystring.parse(formdata);
+					var retval = '';
+					cheuka_session.getMatchData(user_db, user_id, options, function(results)
+					{
+						res.json(results);
+					});
+				});  // end of req.on end	
+			}else{
+				res.json({error: "No access"});
+			}
+		}
+*/
+
 
 // modified by lordstone
     api.get('/matches/:match_id/:info?', function(req, res, cb)

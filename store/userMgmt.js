@@ -267,15 +267,15 @@ function checkMatchId(db, user_id, match_id){
 }
 
 function saveMatchToUser(db, user_id, match_id){
-	console.log('DEBUG: Insert match_id:' + match_id + ' for user_id:' + user_id +'.');
+	//console.log('DEBUG: Insert match_id:' + match_id + ' for user_id:' + user_id +'.');
 	db.table('my_users').first('matches').where({
 		user_id: user_id
 	}).then(function(result){
-		console.log('DEBUG: matches result' + JSON.stringify(result));
+		//console.log('DEBUG: matches result' + JSON.stringify(result));
 		// var match_array = result;
 		if(!result || result == undefined || !result['matches'] || result['matches'] == null){
 			// if it is an empty one
-			console.log('DEBUG: empty match list');
+			//console.log('DEBUG: empty match list');
 			var match_array = [{
 				match_id: match_id
 			}];
@@ -283,34 +283,34 @@ function saveMatchToUser(db, user_id, match_id){
 			result = match_array;
 		}else{
 			// if you need to push in
-			console.log('DEBUG: not empty match list');
+			//console.log('DEBUG: not empty match list');
 			result['matches'].push({
 				match_id: match_id
 			});
 			result = result['matches'];
 		}
-		console.log('DEBUG: saving to USERLIST stringify:' + JSON.stringify(result));
+		//console.log('DEBUG: saving to USERLIST stringify:' + JSON.stringify(result));
 		return db.table('my_users').where({
 			user_id: user_id
 		}).update({
 			matches: JSON.stringify(result)
 		}); 
 	}).then(function(result){
-		console.log('DEBUG: saving to MATCHLIST results:' + JSON.stringify(result));
+		//console.log('DEBUG: saving to MATCHLIST results:' + JSON.stringify(result));
 		// Start updating the match list
 		db.table('my_match_list').first('users_allowed').where({
 			match_id: match_id
 		}).asCallback(function(err, result){
- 	    console.log('DEBUG: MATCHLIST result:' + JSON.stringify(result));	
+ 	    //console.log('DEBUG: MATCHLIST result:' + JSON.stringify(result));	
 			if(result && result != undefined){
 					var user_array = result;
 					for(var i = 0; i < user_array.length; i ++){
 						if(user_array[i] == user_id){
-							console.log('DEBUG: found exising user_id in matchlist');
+							//console.log('DEBUG: found exising user_id in matchlist');
 							return;
 						}
 					}
-					console.log('DEBUG: not found existing user_id');
+					//console.log('DEBUG: not found existing user_id');
 					user_array['users_allowed'].push({user_id: user_id});
 					user_array = user_array['users_allowed'];
 					return db.table('my_match_list').where({
@@ -325,9 +325,9 @@ function saveMatchToUser(db, user_id, match_id){
 					});
 			}else{
 				// if nothing there
-				console.log('DEBUG: adding new user_array');
+				//console.log('DEBUG: adding new user_array');
 				var user_array = [{user_id: user_id}];
-				console.log('DEBUG: user_array:' + JSON.stringify(user_array));
+				//console.log('DEBUG: user_array:' + JSON.stringify(user_array));
 				return db.table('my_match_list').insert({
 					match_id: match_id,
 					users_allowed: JSON.stringify(user_array)
@@ -353,12 +353,57 @@ function getMatchList(db, user_id, cb){
 		if(err){
 			return cb(JSON.stringify({error: e}));
 		}
-		console.log('DEBUG: match result:' + JSON.stringify(results));
+		//console.log('DEBUG: match result:' + JSON.stringify(results));
 		return cb(results);
 	}).catch(function(e){
 		console.log('DEBUG: getMatchList error:' + e);
 		return JSON.stringify({error: e});
 	});
+}
+
+function getMatchData(db, user_db, user_id, cb){
+	//lordstone: notice that both user_db and db exist here
+	user_db.table('my_users').where({
+		user_id: user_id
+	}).first('matches').asCallback(function(err, results){
+		if(err){
+			return cb({error: 'error:' + err});
+		}
+		if(!results || results == undefined){
+			return cb(null);
+		}
+		//console.log('DEBUG:' + results + '|' + JSON.stringify(results));
+		var match_id_set = [];
+		// var res_set = [];
+		var matches = results['matches'];
+		for(var i = 0; i < matches.length; i ++){
+			//console.log('DEBUG: match:' + JSON.stringify(match_entry));
+			var match_id = matches[i]['match_id'];
+			//console.log('DEBUG: get match_id:' + match_id);
+			match_id_set.push(match_id);
+		}
+		db.table('matches').select('match_id', 'upload').whereIn('match_id', match_id_set).asCallback(function(err, results)
+		{
+			if(err){
+				return cb({error: 'error:' + err});
+			}
+			//console.log('DEBUG: found:' + JSON.stringify(results));
+			return cb(results);
+		});
+	});
+
+	/*
+	if(!results.length || results.length == 0){
+    res.json({status: 'empty'});
+  }
+  for(match_obj in results){
+	  var match_id = match_obj['match_id'];
+    var match_json;
+    if(formitems['bp']){
+      var bp = cheuka_session.getBP();
+    }
+  }
+	*/
 }
 
 module.exports = {
@@ -377,6 +422,7 @@ module.exports = {
 	deleteInv: deleteInv,
 	checkMatchId: checkMatchId,
 	saveMatchToUser: saveMatchToUser,
-	getMatchList: getMatchList
+	getMatchList: getMatchList,
+	getMatchData: getMatchData
 };
 
