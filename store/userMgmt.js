@@ -1,5 +1,7 @@
 // var async = require('async');
 var config = require('../config');
+var async = require('async');
+
 
 function logUser(db, user_id, password,  cb){
 	console.log("logging user");
@@ -406,6 +408,59 @@ function getMatchData(db, user_db, user_id, cb){
 	*/
 }
 
+function deleteUserMatch(db, user_db, user_id, match_id, cb){
+//lordstone: logic: find user's matches, delete the match_id from user.
+// if this user is the only allowed user, delete the match from both user and yasp db
+	user_db.table('my_users').first('matches').where('user_id', user_id).asCallback(function(err, result)
+	{
+		if(err){
+			console.log('DEBUG:' + err);
+			return cb(err);
+		}
+		var my_matches = result['matches'];
+		for(var i = 0; i < my_matches.length; i += 1){
+			if(my_matches[i] == match_id){
+				// if this user has the access to the match
+					my_matches.splice(i, 1);
+					user_db.table('my_users').update({
+						matches: my_matches 
+					}).then(function(msg1)
+					{
+						//start 
+						user_db.table('my_match_list').first('users_allowed').where('match_id', match_id).asCallback(function(err, results)
+						{
+						var users_allowed = results['users_allowed'];
+						for(var j = 0; j < users_allowed.length; j ++)
+						{
+							if(users_allowed[i] == user_id){
+								if(users_allowed.length == 1){
+									//need to delete match in yasp
+									user_db.table['my_match_list'].delete().where('match_id', match_id).then(function(msg)
+									{
+										db.table['matches'].delete().where('match_id', match_id).then(function(msg)
+										{
+											return cb(msg);
+										});
+									});
+								}else{
+									//no need to delete match in yasp
+									users_allowed.splice(i, 1);
+	 								user_db.table['my_match_list'].update({
+										users_allowed: users_allowed
+									}).then(function(msg){
+										return cb(msg);
+									});
+								}//end if
+							}//end if
+						}//end for
+					});// end cb
+				});//end then
+			}//end if
+		}//end for
+	});//end cb
+}
+
+
 module.exports = {
 	logUser: logUser,
 	logoutUser: logoutUser,
@@ -423,6 +478,7 @@ module.exports = {
 	checkMatchId: checkMatchId,
 	saveMatchToUser: saveMatchToUser,
 	getMatchList: getMatchList,
-	getMatchData: getMatchData
+	getMatchData: getMatchData,
+	deleteUserMatch: deleteUserMatch
 };
 

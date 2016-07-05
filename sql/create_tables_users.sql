@@ -25,7 +25,8 @@ CREATE TABLE my_invitation_codes (
 CREATE TABLE my_match_list (
 	match_id bigint PRIMARY KEY,
 --	owner_id varchar(30) REFERENCES my_users(user_id),
-	users_allowed json
+	users_allowed json,
+	is_public boolean default false
 );
     
     

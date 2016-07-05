@@ -33,11 +33,41 @@ if user
                tbody
                  each obj in match_list
                    tr
-                     td.col-md-1
+                     td(colspan='3')
                        a(href="/matches/"+ obj.match_id) Match ID: #{obj.match_id}
-                     td.col-md-10 
-                     td.col-md-1
-                       a(href="/matches/delete/" + obj.match_id) Delete
+                       br
+                       - var duration_min = parseInt(obj.upload.duration / 60)
+                       - var duration_sec = obj.upload.duration % 60
+                       p Duration: #{duration_min} min #{duration_sec} sec
+                     td(colspan='7')
+                       h4 Radiant: #{obj.upload.radiant_team_name}
+                       each player in obj.upload.player_info
+                         if player.game_team == 2
+                           - var hero_id = player.hero_id
+                           - var hero = constants.heroes[hero_id]
+                           if hero
+                             span.img-text("text-success")
+                               img.img-sm(src=hero.img, title=hero.localized_name)
+                         else
+                           = hero_id
+                         span player: #{player.player_name}
+ 
+                     td(colspan='7')
+                       h4 Dire: #{obj.upload.dire_team_name}
+                       each player in obj.upload.player_info
+                         if player.game_team == 2
+                           - var hero_id = player.hero_id
+                           - var hero = constants.heroes[hero_id]
+                           if hero
+                             span.img-text("text-success")
+                               img.img-sm(src=hero.img, title=hero.localized_name)
+                           else
+                             = hero_id
+
+                           span player: #{player.player_name}
+
+                     td(colspan='3')
+                       a(href="/center/delete/" + obj.match_id) Delete
                    
                    if obj.upload
                      if obj.upload.picks_bans                         

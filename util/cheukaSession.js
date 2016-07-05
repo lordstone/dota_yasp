@@ -167,6 +167,12 @@ function getMatchData(db, user_db, user_id, cb){
 	});
 }
 
+function deleteUserMatch(db, user_db, user_id, match_id, cb){
+	user_mgmt.deleteUserMatch(db, user_db, user_id, match_id, function(results){
+		return cb(results);
+	});
+}
+
 module.exports = {
 	findAll: findAll,
 	findUser: findUser,
@@ -184,5 +190,6 @@ module.exports = {
 	checkMatchId: checkMatchId,
 	saveMatchToUser: saveMatchToUser,
 	getMatchList: getMatchList,
-	getMatchData: getMatchData
+	getMatchData: getMatchData,
+	deleteUserMatch: deleteUserMatch
 };
