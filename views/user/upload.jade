@@ -21,7 +21,7 @@ if user
               .col-md-3
               .col-md-3 
                 span.btn.btn-block.btn-primary.btn-file#file-select-button
-                  span#file-select-text Add Replay File
+                  span#file-select-text Add Replay Files
                   input#file-select.form-control(type='file', name='add_file', multiple=true)
               .col-md-3
                 span.btn.btn-block.btn-warning.btn-file#upload-button(onclick='uploadSubmit()')
@@ -33,7 +33,7 @@ if user
               .col-md-4
               .col-md-4
                 div#filelist_div
-                  ul#upload_file_ul              
+                  table(style='margin:auto;')#upload_file_table              
               .col-md-4
            #progContainer(style="display:none")
              img(src="/public/images/loading.gif", style="display:none")#loading
@@ -42,7 +42,7 @@ if user
              .progress
                .progress-bar.progress-bar-success.progress-bar-striped.active#parse-bar
            #messages
-      div#upload_status
+      //div#upload_status
         .row
           h3 Upload History
           ul#ul_files

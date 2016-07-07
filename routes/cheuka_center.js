@@ -35,6 +35,7 @@ cheuka_center.get('/delete/:match_id', function(req, res)
 	if(req.session.user){
 		var user_id = req.session.user;
 		var match_id = req.params.match_id;
+		console.log('DEBUG: delete match' + match_id);
 		cheuka_session.deleteUserMatch(db, user_db, user_id, match_id, function(results)
 		{
 			res.redirect('/center');

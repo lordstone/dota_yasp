@@ -151,8 +151,8 @@ function checkMatchId(db, user_id, match_id){
 	return user_mgmt.checkMatchId(db, user_id, match_id);
 }
 
-function saveMatchToUser(db, user_id, match_id){
-	return user_mgmt.saveMatchToUser(db, user_id, match_id);
+function saveMatchToUser(db, user_id, match_id, is_public){
+	return user_mgmt.saveMatchToUser(db, user_id, match_id, is_public);
 }
 
 function getMatchList(db, user_id, cb){

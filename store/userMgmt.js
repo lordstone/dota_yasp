@@ -268,8 +268,9 @@ function checkMatchId(db, user_id, match_id){
 	});
 }
 
-function saveMatchToUser(db, user_id, match_id){
+function saveMatchToUser(db, user_id, match_id, is_public){
 	//console.log('DEBUG: Insert match_id:' + match_id + ' for user_id:' + user_id +'.');
+	console.log('DEBUG:is_public:' + is_public);
 	db.table('my_users').first('matches').where({
 		user_id: user_id
 	}).then(function(result){
@@ -300,25 +301,32 @@ function saveMatchToUser(db, user_id, match_id){
 	}).then(function(result){
 		//console.log('DEBUG: saving to MATCHLIST results:' + JSON.stringify(result));
 		// Start updating the match list
-		db.table('my_match_list').first('users_allowed').where({
+		db.table('my_match_list').first('users_allowed','is_public').where({
 			match_id: match_id
 		}).asCallback(function(err, result){
  	    //console.log('DEBUG: MATCHLIST result:' + JSON.stringify(result));	
 			if(result && result != undefined){
-					var user_array = result;
-					for(var i = 0; i < user_array.length; i ++){
+					var user_array = result['users_allowed'];
+					var old_public = result['is_public'];
+					var repeatedUser = false;
+					for(var i = 0; i < user_array.length; i++){
 						if(user_array[i] == user_id){
 							//console.log('DEBUG: found exising user_id in matchlist');
-							return;
+							if(old_public == is_public){
+								return;
+							}
+							repeatedUser = true;
 						}
 					}
 					//console.log('DEBUG: not found existing user_id');
-					user_array['users_allowed'].push({user_id: user_id});
+					if(repeatedUser == false)
+						user_array['users_allowed'].push({user_id: user_id});
 					user_array = user_array['users_allowed'];
 					return db.table('my_match_list').where({
 						match_id: match_id
 					}).update({
-						users_allowed: JSON.stringify(user_array)
+						users_allowed: JSON.stringify(user_array),
+						is_public: (is_public || old_public)
 					}).asCallback(function(err, result){
 						if(err){
 							console.log('update match list in user_db failed');
@@ -332,7 +340,8 @@ function saveMatchToUser(db, user_id, match_id){
 				//console.log('DEBUG: user_array:' + JSON.stringify(user_array));
 				return db.table('my_match_list').insert({
 					match_id: match_id,
-					users_allowed: JSON.stringify(user_array)
+					users_allowed: JSON.stringify(user_array),
+					is_public: is_public
 				}).asCallback(function(err, result){
 					if(err){
 						console.log('DEBUG:ERROR: ' + err);
@@ -346,6 +355,7 @@ function saveMatchToUser(db, user_id, match_id){
 		console.log('DEBUG:ERROR:Find my_user err: '+ e);
 		return;
 	});
+	// make it public
 }
 
 function getMatchList(db, user_id, cb){
@@ -378,6 +388,9 @@ function getMatchData(db, user_db, user_id, cb){
 		var match_id_set = [];
 		// var res_set = [];
 		var matches = results['matches'];
+		if(!matches || !matches.length){
+			return cb(null);
+		}
 		for(var i = 0; i < matches.length; i ++){
 			//console.log('DEBUG: match:' + JSON.stringify(match_entry));
 			var match_id = matches[i]['match_id'];
@@ -413,50 +426,87 @@ function deleteUserMatch(db, user_db, user_id, match_id, cb){
 // if this user is the only allowed user, delete the match from both user and yasp db
 	user_db.table('my_users').first('matches').where('user_id', user_id).asCallback(function(err, result)
 	{
+		console.log('DEBUG: my users find user_id cb');
 		if(err){
-			console.log('DEBUG:' + err);
+			console.log('DEBUG: deleteUserMatch db err:' + err);
 			return cb(err);
 		}
 		var my_matches = result['matches'];
+		console.log('DEBUG: it will have ' + my_matches.length + ' loop');
+		var mark = false;
 		for(var i = 0; i < my_matches.length; i += 1){
-			if(my_matches[i] == match_id){
+			console.log('DEBUG: in for loop. mymatches[i]:' + my_matches[i]['match_id']);
+			if(my_matches[i]['match_id'] == match_id){
 				// if this user has the access to the match
+					mark = true;
+					console.log('DEBUG: match id matches');
 					my_matches.splice(i, 1);
-					user_db.table('my_users').update({
-						matches: my_matches 
+					console.log('DEBUG: after splice:' + JSON.stringify(my_matches));
+					user_db.table('my_users')
+					.where('user_id', user_id)
+					.update({
+						matches: JSON.stringify(my_matches)
 					}).then(function(msg1)
 					{
 						//start 
-						user_db.table('my_match_list').first('users_allowed').where('match_id', match_id).asCallback(function(err, results)
+						console.log('DEBUG: update user matches done');
+						user_db.table('my_match_list')
+						.first('users_allowed')
+						.where('match_id', match_id)
+						.then(function(results)
 						{
+						console.log('DEBUG: show match list json:' + JSON.stringify(results));
 						var users_allowed = results['users_allowed'];
+						var mark2 = false;
 						for(var j = 0; j < users_allowed.length; j ++)
 						{
-							if(users_allowed[i] == user_id){
+							if(users_allowed[i]['user_id'] == user_id){
+								mark2 = true;
 								if(users_allowed.length == 1){
 									//need to delete match in yasp
-									user_db.table['my_match_list'].delete().where('match_id', match_id).then(function(msg)
+									console.log('DEBUG: the only user : match');
+									user_db.table('my_match_list')
+									.where('match_id', match_id)
+									.del()
+									.then(function(msg)
 									{
-										db.table['matches'].delete().where('match_id', match_id).then(function(msg)
+										console.log('DEBUG: delete match list done');
+										db.table('matches')
+										.where('match_id', match_id)
+										.del()
+										.then(function(msg)
 										{
+											console.log('DEBUG: delete yasp match done');
 											return cb(msg);
 										});
 									});
 								}else{
+									console.log('DEBUG: no need to delete match list');
 									//no need to delete match in yasp
 									users_allowed.splice(i, 1);
-	 								user_db.table['my_match_list'].update({
-										users_allowed: users_allowed
+	 								user_db.table('my_match_list')
+									.where('match_id', match_id)
+									.update({
+										users_allowed: JSON.stringify(users_allowed)
 									}).then(function(msg){
+										console.log('DEBUG: delete yasp match done');
 										return cb(msg);
 									});
 								}//end if
+								break;
 							}//end if
 						}//end for
+						if(mark2 == false){
+							return cb(msg1);
+						}
 					});// end cb
 				});//end then
+				break;
 			}//end if
 		}//end for
+		if(mark == false){
+			return cb(result);
+		}
 	});//end cb
 }
 

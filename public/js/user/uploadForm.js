@@ -15,15 +15,32 @@ window.requestForm = function requestForm()
     {
         // var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
         var f =  document.getElementById('file-select').files;
-        var insertHTML = '';
+        var insertHTML = '<tbody>';
         for(var i = 0; i < f.length; i ++){
-            insertHTML += "<li>" + f[i].name + "</li>";
+            insertHTML += "<tr><td colspan = 6><p>" + f[i].name + "</p></td><td colspan=4><input type='checkbox' name='is_public'>public</td></tr>";
         }
-        $("#upload_file_ul").html(insertHTML);
+				insertHTML += '</tbody>';
+        $("#upload_file_table").html(insertHTML);
         $("#file-select-text").text('Change Files');
        //$("#file-select-button").toggleClass('btn-success');
     });
 }
+/*
+function removeThis(index)
+{
+	// alert('Delete:' + index);
+	
+	var f =  document.getElementById('file-select').files;
+	var fi = f[index];
+	for(i in fi){
+		alert('child:' + i);
+	}
+	
+	document.getElementById('file-select').removeChild(document.getElementById('file-select').files);
+	document.getElenebtById('upload_file_table').tbody.removeChild(index);
+}
+*/
+
 window.uploadSubmit = function submit(response)
 {
     var checker;
@@ -41,24 +58,20 @@ window.uploadSubmit = function submit(response)
     // Create a new FormData object.
     var formData = new FormData();
 	// formData.append('replay_blob', files, files.name);
-    fileNum = files.length; // set total files
-    curNum = 0; // set cur file num
     // totalLengthLoaded = 0; // set cur length loaded
     // var totalLength = 0;
+		//formData.append('jiji', '123456');
+		var is_public = [];
+		var is_public_input = document.getElementsByName('is_public');
     for(var i = 0; i < files.length; i ++)
     {	
-	console.log(files[i]);
+				is_public[i] = is_public_input[i].checked;
+				console.log('is_public_' + i + ':' + is_public[i]);
+				console.log(files[i]);
         formData.append('replay_blob', files[i], files[i].name);
-        totalLength += files[i].length;
     }
-	console.log('totalLength:' + totalLength);
-
-/*
-    else if (match_id)
-    {
-        formData.append('match_id', match_id);
-    }
-*/
+		formData.append('is_public', JSON.stringify({is_public: is_public}));
+		// ispublic bool 
     formData.append('response', response);
     console.log(formData);
     // Set up the request.

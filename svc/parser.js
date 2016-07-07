@@ -98,8 +98,9 @@ pQueue.process(1, function(job, cb)
                 parsed_data.duration = match.duration;
                 parsed_data.replay_blob_key = match.replay_blob_key;
                 parsed_data.parse_status = 2;
-                //lordstone: added user_id
+                //lordstone: added user_id and is_public
                 parsed_data.user_id = match.user_id;
+								parsed_data.is_public = match.is_public;
                 if (match.replay_blob_key)
                 {
                     insertUploadedParse(parsed_data, cb);
@@ -156,7 +157,7 @@ function insertUploadedParse(match, cb)
     renderMatch(match);
     
     //lordstone: modify user_db, keep match private
-    cheuka_session.saveMatchToUser(user_db, match.user_id, match.match_id);
+    cheuka_session.saveMatchToUser(user_db, match.user_id, match.match_id, match.is_public);
     
     benchmarkMatch(redis, match, function(err)
     {
