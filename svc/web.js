@@ -43,7 +43,7 @@ var user_db = require('../store/user_db');
 // cheuka route
 var cheuka_admin = require('../routes/cheuka_admin');
 var cheuka_center = require('../routes/cheuka_center');
-
+var cheuka_banpick = require('../routes/cheuka_banpick');
 //PASSPORT config
 passport.serializeUser(function(user, done)
 {
@@ -254,6 +254,8 @@ app.use('/api', api(db, redis, cassandra));
 app.use('/admin', cheuka_admin(db, redis, cassandra));
 
 app.use('/center', cheuka_center(db, redis, cassandra));
+
+app.use('/banpick', cheuka_banpick(db, redis, cassandra));
 
 app.route('/register').get(function(req, res, next){
 //lordstone: register with invitation code
