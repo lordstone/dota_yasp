@@ -28,8 +28,11 @@ if user
                  - var duration_min = parseInt(obj.upload.duration / 60)
                  - var duration_sec = obj.upload.duration % 60
                  p Duration: #{duration_min} min #{duration_sec} sec
-                 if obj.start_time
-                   p Time: #{obj.upload.start_time}
+                 if obj.upload
+                   if obj.upload.end_time
+                     p End Time: 
+                       abbr(title=moment.unix(obj.upload.end_time).fromNow())= moment.unix(obj.upload.end_time).format('YYYY-MM-DD HH:mm:ss')
+
 
               .col-md-7
                  if obj.upload
