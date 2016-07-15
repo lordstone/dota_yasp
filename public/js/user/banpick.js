@@ -251,15 +251,15 @@ function igniteSlot(){
 		break;
 		case (RIGHT_BAN):
 			$('#right_ban_' + hero_slots.dire_ban.length).addClass('submit_button');
-			last_slot = $('#right_ban_' + hero_slots.radiant_ban.length);
+			last_slot = $('#right_ban_' + hero_slots.dire_ban.length);
 		break;
 		case (LEFT_PICK):
 			$('#left_pick_' + hero_slots.radiant_pick.length).addClass('submit_button');
-			last_slot = $('#left_pick_' + hero_slots.radiant_ban.length);
+			last_slot = $('#left_pick_' + hero_slots.radiant_pick.length);
 		break;
 		case (RIGHT_PICK):
 			$('#right_pick_' + hero_slots.dire_pick.length).addClass('submit_button');
-			last_slot = $('#right_pick_' + hero_slots.radiant_ban.length);
+			last_slot = $('#right_pick_' + hero_slots.dire_pick.length);
 		break;
 	} // end switch
 }
