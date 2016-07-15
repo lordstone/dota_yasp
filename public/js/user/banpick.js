@@ -2,220 +2,427 @@
  * for cheuka's dota
  * by lordstone
  */
-//alert('popo');
-/*
-window.onload()=function(){
-	alert('jiji!');
-
-};
-*/
-
-
-// time:
-
-var times = {
-	normalTime: 30,
-	reserveTime: 130 
-};
 
 const LEFT_TIMER = 0;
 const RIGHT_TIMER = 1;
 const LEFT_RES_TIMER = 2;
 const RIGHT_RES_TIMER = 3;
 
-const LEFT_BAN = 0;
-const RIGHT_BAN = 1;
-const LEFT_PICK = 2;
-const RIGHT_PICK = 3;
+const LEFT_BAN = 1;
+const RIGHT_BAN = 2;
+const LEFT_PICK = 3;
+const RIGHT_PICK = 4;
 
+const BP_START = 0;
+const BP_CONFIRM = 5;
+const BP_END = 6;
 
+const STATUS_TEXT = [
+	'Ready to Start',     // 0 
+	'Radiant Ban',        // 1
+	'Dire Ban',           // 2
+	'Radiant Pick',       // 3
+	'Dire Pick',          // 4
+	'Finished: Confirm?',          // 5
+	'Save'				  // 6				
+];
 
-// status: 0: ready, 1: captain mode, 2: ended, 3: paused
-var status = 0;
+const BUTTON1_TEXT = [
+	'Start',     // 0 
+	'Ban',        // 1
+	'Ban',           // 2
+	'Pick',       // 3
+	'Pick',          // 4
+	'Confirm',           // 5
+	'Save to Cloud'            // 6
+];
 
-// phase: 0: left ban, 1: right ban, 2: left pick, 3: right pick, 4: finished
-// var phase = 0;
+const BUTTON2_TEXT = [
+	'Cancel',     // 0 
+	'Pause',        // 1
+	'Pause',           // 2
+	'Pause',       // 3
+	'Pause',          // 4
+	'Restart',           // 5
+	'Save to File'      // 6
+];
+
+const EMPTY_BAN_HERO = -1;
+
+var user_defined_procedure;
+
+// time:
+var times = {
+	normalTime: 30,
+	reserveTime: 130 
+};
 
 // may be replaced by user-defined procedure
 var procedure = [
+	BP_START,
 	LEFT_BAN, RIGHT_BAN, LEFT_BAN, RIGHT_BAN,         // 4
 	LEFT_PICK, RIGHT_PICK, RIGHT_PICK, LEFT_PICK,     // 4
 	RIGHT_BAN, LEFT_BAN, RIGHT_BAN, LEFT_BAN,         // 4
 	RIGHT_PICK, LEFT_PICK, RIGHT_PICK, LEFT_PICK,     // 4
 	RIGHT_BAN, LEFT_BAN,                              // 2
-	LEFT_PICK, RIGHT_PICK                             // 2
+	LEFT_PICK, RIGHT_PICK,                            // 2
+	BP_CONFIRM, BP_END                             
 ];                                                  // 20
 
 var is_reserved_time = false;
 
-var radiant_reserved_time = time.reserveTime;
-var dire_reserved_time = time.reserveTime;
+var paused_timekeep = 0;
+
+var radiant_reserved_time = times.reserveTime;
+var dire_reserved_time = times.reserveTime;
 
 var is_radiant_turn = true;
 
 var cur_procedure = 0;
 
-var hero_slot = {
+var cur_src = '';
+
+var hero_slots = {
 	radiant_ban: [],
 	radiant_pick: [],
 	dire_ban: [],
 	dire_pick: []
 };
 
+var selected_hero;
+
 var timer;
 var timer_secs;
 var timer_cb;
 var timer_index;
 
-function button2_click(){
+var is_paused = false;
 
+var last_slot = null;
+
+function saveBanpick(){
+	// setStatus();
 }
 
-function finished(){
-	setStatus('Mock BP is Finished');
+function getTimerIndex(proc){
+	var my_index = (proc - 1) % 2 ;
+	return is_reserved_time ? my_index + 2 : my_index;
 }
 
-function setStatus(msg){
-	$('#main_status').html(msg);
+function setStatus(){
+	$('#main_status').html(STATUS_TEXT[procedure[cur_procedure]]);
+	$('#button1').html(BUTTON1_TEXT[procedure[cur_procedure]]);
+	$('#button2').html(BUTTON2_TEXT[procedure[cur_procedure]]);
 }
 
-function setTimerText(secs, index){
-	var min = Math.floor(secs / 60);
-	var sec = secs % 60;
-	$('#timer_' + index).html((min<10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec);
+function setTimerText(){
+	if(timer_index != LEFT_TIMER) $('#timer_' + LEFT_TIMER).html('00:00');
+	if(timer_index != RIGHT_TIMER) $('#timer_' + RIGHT_TIMER).html('00:00');
+	var min = Math.floor(parseInt(timer_secs) / 60);
+	var sec = parseInt(timer_secs) % 60;
+	$('#timer_' + timer_index).html((min<10 ? '0' : '') + String(min) + ':' + (sec < 10 ? '0' : '') + String(sec));
+	// console.log((min<10 ? '0' : '') + String(min) + ':' + (sec < 10 ? '0' : '') + String(sec));
 }
-// start of high level functions
+
+//function countDown();
 
 function stopTimer(){
+	console.log('stopTimer');
 	clearTimeout(timer);
+	var secs = timer_secs;
 	timer_secs = 0;
+	return secs;
 }
 
 function startReserve(){
+	console.log('startReserve');
 	if(is_radiant_turn){
-		timer_secs = radiant_reserved_time;
-		timer_index = 2;
+		timer_secs = radiant_reserved_time + 1;
+		timer_index = LEFT_RES_TIMER;
 	}else{
-		timer_secs = dire_reserved_time;
-		timer_index = 3;
+		timer_secs = dire_reserved_time + 1;
+		timer_index = RIGHT_RES_TIMER;
 	}
-	setTimerText(secs, timer_index);
-	countDown;
+	// setTimerText(timer_secs, timer_index);
+	timer_cb = changeStatus;
+	countDown();
 }
 
-function startBanpick(){
+function doBanpick(){
 	// this will do: push selected hero into banpick/slot
   //               start the next timer
+	console.log('doBanpick');
+	if(selected_hero){
+				// start push into selected slot
+		switch(procedure[cur_procedure]){
+			case (LEFT_BAN):
+				hero_slots.radiant_ban.push(selected_hero);
+				$('#left_ban_' + (hero_slots.radiant_ban.length - 1)).attr('src', $('#selected_hero').attr('src'));
+				$('#left_ban_' + (hero_slots.radiant_ban.length - 1)).attr('title', $('#selected_hero').attr('title'));
+			break;
+			case (RIGHT_BAN):
+				hero_slots.dire_ban.push(selected_hero);
+				$('#right_ban_' + (hero_slots.dire_ban.length-1)).attr('src', $('#selected_hero').attr('src'));
+				$('#right_ban_' + (hero_slots.dire_ban.length-1)).attr('title', $('#selected_hero').attr('title'));
+			break;
+			case (LEFT_PICK):
+				hero_slots.radiant_pick.push(selected_hero);
+				$('#left_pick_' + (hero_slots.radiant_pick.length-1)).attr('src', $('#selected_hero').attr('src'));
+				$('#left_pick_' + (hero_slots.radiant_pick.length-1)).attr('title', $('#selected_hero').attr('title'));
+			break;
+			case (RIGHT_PICK):
+				hero_slots.dire_pick.push(selected_hero);
+				$('#right_pick_' + (hero_slots.dire_pick.length-1)).attr('src', $('#selected_hero').attr('src'));
+				$('#right_pick_' + (hero_slots.dire_pick.length-1)).attr('title', $('#selected_hero').attr('title'));
+			break;
+			default:
+				alert('Wrong js file. please contact service provider');
+				return;
+		}	//end switch
+		$('#hero_' + selected_hero).attr('src', '');
+		$('#hero_' + selected_hero).css('background-color', 'black');
+	}
+}
 
+function newBanpick(){
+	//setStatus();
+	console.log('newBanpick');
+	is_reserved_time = false;
+	stopTimer();
+	timer_secs = times.normalTime + 1;
+	timer_cb = startReserve;
+	timer_index = getTimerIndex([procedure[cur_procedure]]);
+	countDown();
+}
 
-	cur_procedure += 1;
-	timer_secs = time.normalTime;
-	var cur_pos = procedure[cur_procedure];
+function emptyBan(){
+	console.log('emptyBan');
+	switch(procedure[cur_procedure]){
+		case(LEFT_BAN):
+			hero_slots.radiant_ban.push(EMPTY_BAN_HERO);
+		break;
+		case(RIGHT_BAN):
+			hero_slots.dire_ban.push(EMPTY_BAN_HERO);
+		break;
+		default:
+			alert('emptyBan(). wrong js file. contact service provider');
+	} //end switch
+}
 
+function randomPick(){
+	console.log('randomPick');
+	var rand_hero_id = parseInt(Math.random() * 112 + 1);
+	var origin_hero = $('#hero_' + rand_hero_id);
+	while(true){
+		if(rand_hero_id != 28 && origin_hero && origin_hero.src != '')
+		{
+			break;	
+		}
+		rand_hero_id = parseInt(Math.random() * 112 + 1);
+		origin_hero = $('#hero_' + rand_hero_id);
+	}	
+	switch(procedure[cur_procedure]){
+		case(LEFT_PICK):
+			hero_slots.radiant_pick.push(rand_hero_id);
+			$('#left_pick_' + hero_slots.radiant_pick.length-1).attr('src', origin_hero.attr('src'));
+		break;
+		case(RIGHT_PICK):
+			hero_slots.dire_pick.push(rand_hero_id);
+			$('#right_pick_' + hero_slots.dire_pick.length-1).attr('src', origin_hero.attr('src'));
+		break;
+		default:
+			alert('randomPick(). wrong js file. contact service provider');
+	} //end switch
+	
+}
+function extinguishSlot(){
+	console.log('extinguishSlot');
+	if(last_slot != null){
+		last_slot.removeClass('submit_button');
+	}
+}
+
+function igniteSlot(){
+	console.log('ignoreSlot');
+	switch(procedure[cur_procedure]){
+		case (LEFT_BAN):
+			$('#left_ban_' + hero_slots.radiant_ban.length).addClass('submit_button');
+			last_slot = $('#left_ban_' + hero_slots.radiant_ban.length);
+		break;
+		case (RIGHT_BAN):
+			$('#right_ban_' + hero_slots.dire_ban.length).addClass('submit_button');
+			last_slot = $('#right_ban_' + hero_slots.radiant_ban.length);
+		break;
+		case (LEFT_PICK):
+			$('#left_pick_' + hero_slots.radiant_pick.length).addClass('submit_button');
+			last_slot = $('#left_pick_' + hero_slots.radiant_ban.length);
+		break;
+		case (RIGHT_PICK):
+			$('#right_pick_' + hero_slots.dire_pick.length).addClass('submit_button');
+			last_slot = $('#right_pick_' + hero_slots.radiant_ban.length);
+		break;
+	} // end switch
+}
+
+function doConfirm(){
+	console.log('doConfirm');
+	for(var i = 0; i < 5; i ++){
+		$('#left_hero_slot_' + i).attr('src', $('#left_pick_' + i).attr('src'));
+		$('#right_hero_slot_' + i).attr('src', $('#right_pick_' + i).attr('src'));
+		$('#left_hero_slot_' + i).attr('title', $('#left_pick_' + i).attr('title'));
+		$('#right_hero_slot_' + i).attr('title', $('#right_pick_' + i).attr('title'));
+	}
 }
 
 function changeStatus(passed){
-	if(cur_procedure < 20 && cur_procedure >= 0){
-		if(passed === true){
-			// if it was a passed status change
-			if(is_reserved_time === false){
-				// if originally not a reserve phase
-				if(is_radiant_turn ? (radiant_reserved_time > 0) : (dire_reserved_time > 0)){
-					// if still has reserve time
-					startReserve();
-				}else{
-					// random pick
-					randomPick();
-				}
+	console.log('changeStatus');
+	extinguishSlot();
+	if(is_reserved_time === true){
+		// if clicked
+		if(passed === false){
+			if(is_radiant_turn === true){
+				radiant_reserved_time = stopTimer();
 			}else{
-				// if already in reserve time phase
-				randomPick();
+				dire_reserved_time = stopTimer();
 			}
-		}else{
-			// if it was a clicked status change
-			if(is_reserved_time === true){
-				is_reserved_time = false;
-				if(is_radiant_turn){
-					radiant_reserved_time = timer_secs;
-				}else{
-					dire_reserved_time = timer_secs;
-				}
-				stopTimer();
+		}else if(passed === true){
+			switch(procedure[cur_procedure]){
+				case(LEFT_BAN):
+				case(RIGHT_BAN):
+					emptyBan();
+				break;
+				case(LEFT_PICK):
+				case(RIGHT_PICK):
+					randomPick();
+				break;
+				default:
+					alert('wrong js file. Contact service provider.');
+					return;					
+			} // end switch
+			if(is_radiant_turn === true){
+				radiant_reserved_time = 0;
+			}else{
+				dire_reserved_time = 0;
 			}
-			startBanpick();
 		}
-
+		is_reserved_time = false;
 	}else{
-		//end
-		finished();
+		stopTimer();
 	}
+	switch(procedure[cur_procedure])
+	{
+		case(BP_START):
+			cur_procedure += 1;
+			newBanpick();
+			$('#button1').attr('disabled', true);
+			$('#button2').attr('disabled', false);
+			igniteSlot();
+		break;
+		case(LEFT_BAN):
+		case(RIGHT_BAN):
+		case(LEFT_PICK):
+		case(RIGHT_PICK):
+			if(passed === false) doBanpick();
+			cur_procedure += 1;
+			if(procedure[cur_procedure] < BP_CONFIRM){
+				$('#button1').attr('disabled', true);
+				newBanpick();
+			}else{
+				stopTimer();
+				$('#button').attr('disabled', false);		
+			}
+			igniteSlot();
+			is_radiant_turn = (procedure[cur_procedure] === LEFT_BAN || procedure[cur_procedure] === LEFT_PICK);
+		break;
+		case(BP_CONFIRM): // to confirm
+			cur_procedure += 1;	
+			doConfirm();
+			$('#button').attr('disabled', false);		
+		break;
+		case(BP_END):  // confirmed & finished
+			// Save the BP result
+			saveBanpick();
+			cur_procedure = BP_START;
+		break;
+		default:
+			alert('JS file wrong. Contact service provider!');
+			return;
+	}// end switc
+	setStatus();
+}
 
+function doPause(){
+	console.log('doPause');
+	if(is_paused === false){
+		is_paused = true;
+		$('#button2').html('Resume');
+		paused_timekeep = stopTimer();
+	}else{	
+		is_paused = false;
+		$('#button2').html('Pause');
+		timer_secs = paused_timekeep + 1;
+		countDown();
+	}
 }
 
 function countDown(){
-//	alert(secs);
-	secs -= 1;
-	setTimerText(secs, timer_index);
-	if(secs === 0){
-		return changeStatus(true);
+	// console.log('time:' + timer_secs);
+	timer_secs -= 1;
+	setTimerText();
+	if(timer_secs <= 0){
+		console.log('It is time!');
+		stopTimer();
+		if(timer_cb == changeStatus)
+			timer_cb(true);
+		else
+			timer_cb();
 	}else{
 		timer = setTimeout('countDown()', 1000);
 	}
 }
-
-
-/*
-function setLeftBan(){
-	setStatus('Radiant Ban');
-	secs = times.normalTime;
-	status = LEFT_BAN;
-	timer_cb = function(){alert('time!')};
-	timer_index = LEFT_TIMER;
-	countDown();
-}
-
-function setRightBan(){
-	setStatus('Dire Ban');
-	secs = times.normalTime;
-	status = RIGHT_BAN;
-	timer_cb = function(){alert('time!')};
-	timer_index = LEFT_TIMER;
-	countDown();
-}
-*/
-
 // end of high level functions
 
 function button1_click(){
-	if(status == 0){
-		status = 1; // started
-		$('#button1').val('Select');
-		$('#button1').attr('disabled', true);
-		secs = times.normalTime;
-		timer_cb = function(){alert('time!')};
-		timer_index = LEFT_TIMER;
-		countDown();
-	}
+	// main button
+	changeStatus(false);
 }
+
+function button2_click(){
+	doPause();
+}
+
 function pick_hero(hero_id){
 	// it is working
+	console.log('pick_hero');
 	var tmp = $('#hero_' + hero_id);
-	//var mask = $('#hero_mask_' + hero_id);
-//	var tmp = document.getElementById('hero_' + hero_id);
-//	tmp.css({'-web-filter': 'grayscale(100%)'});
-//	tmp.addClass('gray_img');
-	//mask.show();
-	tmp.attr('src', '');
-	tmp.css('background-color','black');
-//	tmp.addClass('submit_button');
-	//tmp.css('border', '2px solid white');
-	//alert(hero_id);
+	if(tmp.attr('src') == ''){
+		return;  // already picked/banned -- ignore it
+	}
+	if(selected_hero){
+		var old_tmp = $('#hero_' + selected_hero);
+		old_tmp.css('border', 'none');
+		old_tmp.removeClass('submit_button');
+	}
+	selected_hero = hero_id;
+	tmp.css('border','yellow 2px solid');
+  	tmp.addClass('submit_button');
+	$('#button1').attr('disabled', false);
+	var srctext = tmp.attr('src');
+	var titletext = tmp.attr('title');
+	$('#hero_name').html(titletext);
+	$('#selected_hero').attr('src', srctext);
+	$('#selected_hero').attr('title', titletext); 
 }
 
 $(document).ready(function(){
-	//set init status
-	setStatus('Ready to Start');
-	status = 0;
+	//set init status	
+	// alert('ready!');
+	setStatus();
+	cur_procedure = 0;
+	$('#button1').attr('disabled', false);
+	if(user_defined_procedure){
+		procedure = user_defined_procedure;
+	}
 });
 
 

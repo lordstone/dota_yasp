@@ -1,7 +1,7 @@
 mixin hero_banpick(hero_id)
   - var hero = constants.heroes[hero_id]
   if hero
-    img.img-sm.hero_button(id='hero_' + hero_id, src=hero.img, title=hero.localized_name, onclick='pick_hero(' + hero_id + ');', style='height: 24px; width:43px;')=hero.localized_name
+    img.img-sm.hero_button(id='hero_' + hero_id, src=hero.img, title=hero.localized_name, onclick='pick_hero(' + hero_id + ');', style='height: 30px; width:50px;')=hero.localized_name
       // img.img-sm.hero_mask(id='hero_mask_' + hero_id, style='background-color: black; opacity:75%; z-index: 5; height: 24px; width:43px;', display='none')
   else
     =hero_id
